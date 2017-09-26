@@ -2,6 +2,14 @@
 
 > hpiss vue version
 
+## 技术栈
+
+- vuejs 2
+- vue-router
+- vue-cli
+- vuex
+- vue-resource
+
 ## Build Setup
 
 ``` bash
