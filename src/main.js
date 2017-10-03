@@ -1,10 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
 import Vuex from 'vuex'
-import Home from './components/Home.vue'
+import home from './components/home.vue'
+
+import highlyUI from './components/highly-ui/'
 Vue.use(Vuex)
+Vue.use(VueResource)
 Vue.use(VueRouter)
+Vue.use(highlyUI)
+
+
 // const Foo = { template: '<div>foo</div>' };
 // const Bar = { template: '<div>bar</div>' };
 
@@ -15,30 +22,30 @@ const store = new Vuex.Store({
     contactUsOpened: false //联系我们
   },
   mutations: {
-    toggleAdvSearch(state) {
-      state.advSearchOpened = !state.advSearchOpened
-    },
-    closeAdvSearch(state) {
-      state.advSearchOpened = false;
-    },
-    toggleContactUs(state) {
-      state.contactUsOpened = !state.contactUsOpened
-    },
-    closeContactUs(state) {
-      state.contactUsOpened = false;
+    // toggleAdvSearch(state) {
+    //   state.advSearchOpened = !state.advSearchOpened
+    // },
+    // closeAdvSearch(state) {
+    //   state.advSearchOpened = false;
+    // },
+    // toggleContactUs(state) {
+    //   state.contactUsOpened = !state.contactUsOpened
+    // },
+    // closeContactUs(state) {
+    //   state.contactUsOpened = false;
+    // },
+    toggleForm(state,name) {
+      state[name] = !state[name];
     },
     closeForm(state,name) {
       state[name] = false;
-    },
-    toggleForm(state,name) {
-      state[name] = !state[name]
     }
   }
 })
 
 // router config
 const routes = [
-  { path: '/home', component: Home }
+  { path: '/', component: home }
   // { path: '/bar', component: Bar }
 ];
 const router = new VueRouter({
