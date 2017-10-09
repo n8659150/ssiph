@@ -14,57 +14,11 @@
                                 <div class="result-setting">
                                     <table width="100%" cellspacing="0" cellpadding="0">
                                         <tbody>
-                                            <tr>
-                                                <th>
-                                                    应用领域：
-                                                </th>
-                                                <td>
-                                                    轻商，家用
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        <input type="checkbox" />
-                                                        <span style="margin-left:5px;margin-right:10px;">轻商</span>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    产品类型：
-                                                </th>
-                                                <td>
-                                                    定速，变频
-                                                </td>
-                                                <td>
-                                                    <!-- _a 代表advSearch中的productType,_c代表 contactUs中的 -->
-                                                    <select name="productType_a" class="advSelect" v-model="productType_a">
-                                                        <option value="-1">不限</option>
-                                                        <option value="定速">定速</option>
-                                                        <option value="变频">变频</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    电源-电压：
-                                                </th>
-                                                <td>
-                                                    208V-230V~ 到 380V-415V~
-                                                </td>
-                                                <td>
-                                                    <select name="powerVoltage" class="advSelect" v-model="powerVoltage_a">
-                                                        <option value="-1">不限</option>
-                                                        <option value="208V-230V~">208V-230V~</option>
-                                                        <option value="220V-230V~">220V-230V~</option>
-                                                        <option value="220V-240V~">220V-240V~</option>
-                                                        <option value="220V/380V">220V/380V</option>
-                                                        <option value="220V~">220V~</option>
-                                                        <option value="230V~">230V~</option>
-                                                        <option value="380V~">380V~</option>
-                                                        <option value="380V-415V~">380V-415V~</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
+                                            
+                                            {{productTerritory.model}}
+                                            <hiFormCheckBox :title="productTerritory.title" :description="productTerritory.description" :options="productTerritory.options" v-model="productTerritory.model"></hiFormCheckBox>
+                                            <hiFormDropDown :title="productType.title" :description="productType.description" :options="productType.options" v-model="productType.model"></hiFormDropDown>
+                                            <hiFormDropDown :title="powerVoltage.title" :description="powerVoltage.description" :options="powerVoltage.options" v-model="powerVoltage.model"></hiFormDropDown>
                                             <tr>
                                                 <th>
                                                     电源-频率：
@@ -110,7 +64,7 @@
                                             </tr>
                                             <tr>
                                                 <th width="250">
-                                                    冷媒类型
+                                                    冷媒类型：
                                                 </th>
                                                 <td width="215">
                                                     R410A,R134a,R22,R32,R290
@@ -128,7 +82,7 @@
                                             </tr>
                                             <tr>
                                                 <th width="250">
-                                                    测试工况
+                                                    测试工况：
                                                 </th>
                                                 <td width="215">
                                                     默认为 ASHRAE/T
@@ -194,7 +148,6 @@ export default {
     name: 'advSearchForm',
      data(){
         return {
-            productType_a:'-1',
             powerVoltage_a:'-1',
             powerFrquency_a:'-1',
             powerPhase_a:'-1',
@@ -202,7 +155,26 @@ export default {
             lengliangUnit_a:'W',
             lengmei_a:'-1',
             capMeasCond_a:'-1',
-            serverUrl:globalConsts.serverUrl
+            serverUrl:globalConsts.serverUrl,
+            productTerritory:{
+                model:['轻商','家用'],
+                s:[],
+                title:'应用领域：',
+                description:'轻商，家用',
+                options:[{checked:true,value:"轻商"},{checked:true,value:"家用"}]
+            },
+            productType:{
+                model:'-1',
+                title:'产品类型：',
+                description:'定速，变频',
+                options:[{value:"定速"},{value:"变频"}]
+            },
+            powerVoltage:{
+                model:'-1',
+                title:'电源-电压：',
+                description:'208V-230V~ 到 380V-415V~',
+                options:[{value:"208V-230V~"},{value:"220V-230V~"},{value:"220V-240V~"},{value:"220V/380V"},{value:"220V~"},{value:"230V~"},{value:"380V~"},{value:"380V-415V~"}]
+            }
         }
     },
     methods:{

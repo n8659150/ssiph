@@ -1,9 +1,4 @@
 <script type="text/javascript">
-// const colorListLength = 20
-// function getRandColor () {
-//   var tem = Math.round(Math.random() * colorListLength)
-//   return colorList[tem]
-// }
 // const serverUrl = 'http://172.18.88.189:8080/';
 const serverUrl = 'http://210.13.98.37:8080/';
 // 用户唯一性判断
