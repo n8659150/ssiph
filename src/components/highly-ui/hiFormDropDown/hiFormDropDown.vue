@@ -18,14 +18,15 @@
 </template>
 <script>
 export default{
-    // props:[{'title':String},{'description':String},'options']
-    props:{title:String,description:String,options:Array},
+    // model:{
+    //     prop: 'selectedValue',
+    //     event: 'input' 
+    // },
+    props:{title:String,description:String,options:Array,value:String},
     methods:{
         updateValue: function (value) {
-            // var currentValue = value
-            // 通过 input 事件发出数值
+            // 通过 input 事件发出数值给v-model，相当于发送给props里面定义的这个“value”。
             this.$emit('input', value)
-            console.log(value)
         }
     }
 }

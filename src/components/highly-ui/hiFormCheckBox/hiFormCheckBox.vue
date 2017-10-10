@@ -21,21 +21,19 @@
 <script>
 export default{
     // props:[{'title':String},{'description':String},'options']
-    model: {
-        prop: 'selectedValue',
-        event: 'change'
-    },
-    props:{title:String,description:String,options:Array,selectedValue:Array},
+    
+    props:{title:String,description:String,options:Array,value:Array},// value的类型和父组件 v-model的类型相同
+    //props 里面的 value 和 上面template里面的value并不冲突
+    //props 里面的 value 相当于 <hiFormCheckBox :value='xxx'></hiFormCheckBox>
     methods: {
         updateInput(event){
             let isChecked = event.target.checked;
             let currentValue = event.target.value;
-            let newValue = this.selectedValue;
-            console.log('this.selectedValue',this.selectedValue);
+            let newValue = this.value; // 父组件的v-model 传入什么， this.value就是什么值(父组件的:value是什么值，this.value就是什么值)
             console.log('newValue',newValue);
             console.log('isChecked',isChecked);
             console.log('value',currentValue);
-            
+            console.log(this.description)
             if(isChecked){
                 if(newValue.length == 0) {
                     newValue.push(currentValue)
@@ -51,21 +49,8 @@ export default{
             } else {
                 newValue.splice(newValue.indexOf(currentValue),1)
             }
+            // emit的值会发送给selectedValue
             this.$emit('change',newValue)
-            // console.log(isChecked)
-            // let currentValue = event.target.value
-            // if(this.modelValue instanceof Array){
-            // let newValue= this.modelValue
-            // console.log(newValue)
-            // if(isChecked){
-            // newValue.push(currentValue)
-            // }else{
-            // newValue.splice(newValue.indexOf(currentValue),1)
-            // }
-            // this.$emit('change',newValue)
-            // }else{
-            // this.$emit('change',isChecked?this.trueValue: this.falseValue)
-            // }
         }
     }
 }
