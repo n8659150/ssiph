@@ -9,7 +9,7 @@
     <td>
         <span v-for="(option,key) in options" :key="key">
             <input type="checkbox" :checked="option.checked" :value="option.value" v-on:change="updateInput($event)" />
-            <span style="margin-left:5px;margin-right:10px;">{{option.value}}</span>
+            <span style="margin-left:5px;margin-right:10px;">{{option.name}}</span>
             <!--<input type="checkbox" value="轻商2" v-model="productTerritory" />
             <span style="margin-left:5px;margin-right:10px;">轻商2</span>
             <input type="checkbox" value="轻商3" v-model="productTerritory" />
@@ -20,8 +20,6 @@
 </template>
 <script>
 export default{
-    // props:[{'title':String},{'description':String},'options']
-    
     props:{title:String,description:String,options:Array,value:Array},// value的类型和父组件 v-model的类型相同
     //props 里面的 value 和 上面template里面的value并不冲突
     //props 里面的 value 相当于 <hiFormCheckBox :value='xxx'></hiFormCheckBox>
@@ -30,10 +28,6 @@ export default{
             let isChecked = event.target.checked;
             let currentValue = event.target.value;
             let newValue = this.value; // 父组件的v-model 传入什么， this.value就是什么值(父组件的:value是什么值，this.value就是什么值)
-            console.log('newValue',newValue);
-            console.log('isChecked',isChecked);
-            console.log('value',currentValue);
-            console.log(this.description)
             if(isChecked){
                 if(newValue.length == 0) {
                     newValue.push(currentValue)

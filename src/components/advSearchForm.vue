@@ -14,10 +14,11 @@
                                 <div class="result-setting">
                                     <table width="100%" cellspacing="0" cellpadding="0">
                                         <tbody>
+                                            {{powerFrequency.model}}{{productTerritory.model}}
                                             <hiFormCheckBox :title="productTerritory.title" :description="productTerritory.description" :options="productTerritory.options" v-model="productTerritory.model"></hiFormCheckBox>
                                             <hiFormDropDown :title="productType.title" :description="productType.description" :options="productType.options" v-model="productType.model"></hiFormDropDown>
                                             <hiFormDropDown :title="powerVoltage.title" :description="powerVoltage.description" :options="powerVoltage.options" v-model="powerVoltage.model"></hiFormDropDown>
-                                            <tr>
+                                            <!-- <tr>
                                                 <th>
                                                     电源-频率：
                                                 </th>
@@ -30,7 +31,8 @@
                                                     <label for="freq_ctrl_2_a"><input name="freq_ctrl_2_a" id="freq_ctrl_2_a"  v-model="powerFrquency_a" value="50/60Hz" class="radio" type="radio">50/60Hz</label>
                                                     <label for="freq_ctrl_3_a"><input name="freq_ctrl_3_a" id="freq_ctrl_3_a"  v-model="powerFrquency_a" value="60Hz" class="radio" type="radio">60Hz</label>
                                                 </td>
-                                            </tr>
+                                            </tr> -->
+                                            <hiFormRadioSet :title="powerFrequency.title" :description="powerFrequency.description" :options="powerFrequency.options" v-model="powerFrequency.model"></hiFormRadioSet>
                                             <tr>
                                                 <th>
                                                     电源-相数：
@@ -156,22 +158,28 @@ export default {
             serverUrl:globalConsts.serverUrl,
             productTerritory:{
                 model:['轻商','家用'],
-                s:[],
                 title:'应用领域：',
                 description:'轻商，家用',
-                options:[{checked:true,value:"轻商"},{checked:true,value:"家用"}]
+                options:[{name:'轻商',checked:true,value:'轻商'},{name:'家用',checked:true,value:'家用'}]
             },
             productType:{
                 model:'-1',
                 title:'产品类型：',
                 description:'定速，变频',
-                options:[{value:"定速"},{value:"变频"}]
+                options:[{name:'不限',value:'-1'},{name:'定速',value:'定速'},{name:'变频',value:'变频'}]
             },
             powerVoltage:{
                 model:'-1',
                 title:'电源-电压：',
                 description:'208V-230V~ 到 380V-415V~',
-                options:[{value:"208V-230V~"},{value:"220V-230V~"},{value:"220V-240V~"},{value:"220V/380V"},{value:"220V~"},{value:"230V~"},{value:"380V~"},{value:"380V-415V~"}]
+                options:[{name:'不限',value:'-1'},{name:'208V-230V~',value:'208V-230V~'},{name:'220V-230V~',value:'220V-230V~'},{name:'220V-240V~',value:'220V-240V~'},{name:'220V-380V~',value:'220V/380V'},{name:'220V~',value:'220V~'},{name:'230V~',value:'230V~'},{name:'380V~',value:'380V~'},{name:'380V-415V~',value:'380V-415V~'}]
+            },
+            powerFrequency:{
+                model:'-1',
+                title:'电源-频率：',
+                description:'50Hz~60Hz',
+                options:[{name:'不限',checked:true,value:'-1'},{name:'50Hz',checked:false,value:'50Hz'},{name:'50/60Hz',checked:false,value:'50/60Hz'},{name:'60Hz',checked:false,value:'60Hz'}]
+
             }
         }
     },

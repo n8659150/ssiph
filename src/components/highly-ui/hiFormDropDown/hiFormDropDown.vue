@@ -10,18 +10,13 @@
     </td>
     <td>
         <select name="productType_a" class="advSelect" v-on:input="updateValue($event.target.value)">
-            <option value="-1">不限</option>
-            <option v-for="(option,key) in options" :value="option.value" :key="key">{{option.value}}</option>
+            <option v-for="(option,key) in options" :value="option.value" :key="key">{{option.name}}</option>
         </select>
     </td>
 </tr>
 </template>
 <script>
 export default{
-    // model:{
-    //     prop: 'selectedValue',
-    //     event: 'input' 
-    // },
     props:{title:String,description:String,options:Array,value:String},
     methods:{
         updateValue: function (value) {
