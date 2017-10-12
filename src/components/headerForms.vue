@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import {mapGetters,mapActions,mapMutations,mapState} from 'vuex';　
+import { mapGetters, mapActions, mapMutations, mapState } from 'vuex';
 import advSearchForm from './advSearchForm.vue'
 import contactUsForm from './contactUsForm.vue'
 export default {
     name: 'headerForms',
-    components:{
+    components: {
         advSearchForm,
         contactUsForm
     }

@@ -3,8 +3,7 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import Vuex from 'vuex'
-import home from './components/home.vue'
-
+import mainContent from './components/mainContent.vue'
 import highlyUI from './components/highly-ui/'
 Vue.use(Vuex)
 Vue.use(VueResource)
@@ -34,10 +33,10 @@ const store = new Vuex.Store({
     // closeContactUs(state) {
     //   state.contactUsOpened = false;
     // },
-    toggleForm(state,name) {
+    toggleForm(state, name) {
       state[name] = !state[name];
     },
-    closeForm(state,name) {
+    closeForm(state, name) {
       state[name] = false;
     }
   }
@@ -45,7 +44,7 @@ const store = new Vuex.Store({
 
 // router config
 const routes = [
-  { path: '/', component: home }
+  { path: '/', component: mainContent }
   // { path: '/bar', component: Bar }
 ];
 const router = new VueRouter({

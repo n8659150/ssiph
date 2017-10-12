@@ -14,109 +14,25 @@
                                 <div class="result-setting">
                                     <table width="100%" cellspacing="0" cellpadding="0">
                                         <tbody>
-                                            {{powerFrequency.model}}{{productTerritory.model}}
-                                            <hiFormCheckBox :title="productTerritory.title" :description="productTerritory.description" :options="productTerritory.options" v-model="productTerritory.model"></hiFormCheckBox>
-                                            <hiFormDropDown :title="productType.title" :description="productType.description" :options="productType.options" v-model="productType.model"></hiFormDropDown>
-                                            <hiFormDropDown :title="powerVoltage.title" :description="powerVoltage.description" :options="powerVoltage.options" v-model="powerVoltage.model"></hiFormDropDown>
-                                            <!-- <tr>
-                                                <th>
-                                                    电源-频率：
-                                                </th>
-                                                <td>
-                                                    50Hz~60Hz
-                                                </td>
-                                                <td id="adv-setting-6">
-                                                    <label for="freq_ctrl_0_a"><input name="freq_ctrl_0_a" id="freq_ctrl_0_a"  v-model="powerFrquency_a" value="-1" class="radio" type="radio">不限</label>
-                                                    <label for="freq_ctrl_1_a"><input name="freq_ctrl_1_a" id="freq_ctrl_1_a"  v-model="powerFrquency_a" value="50Hz" class="radio" type="radio">50Hz</label>
-                                                    <label for="freq_ctrl_2_a"><input name="freq_ctrl_2_a" id="freq_ctrl_2_a"  v-model="powerFrquency_a" value="50/60Hz" class="radio" type="radio">50/60Hz</label>
-                                                    <label for="freq_ctrl_3_a"><input name="freq_ctrl_3_a" id="freq_ctrl_3_a"  v-model="powerFrquency_a" value="60Hz" class="radio" type="radio">60Hz</label>
-                                                </td>
-                                            </tr> -->
-                                            <hiFormRadioSet :title="powerFrequency.title" :description="powerFrequency.description" :options="powerFrequency.options" v-model="powerFrequency.model"></hiFormRadioSet>
-                                            <tr>
-                                                <th>
-                                                    电源-相数：
-                                                </th>
-                                                <td>
-                                                    单相, 单相或三相, 三相
-                                                </td>
-                                                <!-- 电源-相数 radio型 -->
-                                                <td id="adv-setting-6">
-                                                    <label for="phase_ctrl_0_a"><input name="phase_ctrl_0_a" id="phase_ctrl_0_a"  v-model="powerPhase_a" value="-1" class="radio" type="radio">不限</label>
-                                                    <label for="phase_ctrl_1_a"><input name="phase_ctrl_1_a" id="phase_ctrl_1_a"  v-model="powerPhase_a" value="1" class="radio" type="radio">单相</label>
-                                                    <label for="phase_ctrl_2_a"><input name="phase_ctrl_2_a" id="phase_ctrl_2_a"  v-model="powerPhase_a" value="1/3" class="radio" type="radio">单相或三相</label>
-                                                    <label for="phase_ctrl_3_a"><input name="phase_ctrl_3_a" id="phase_ctrl_3_a"  v-model="powerPhase_a" value="3" class="radio" type="radio">三相</label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th width="250">
-                                                    冷量：
-                                                </th>
-                                                <td width="215">
-                                                    <span>7000~16000
-                                                        <span class="unitStyle">W</span>
-                                                    </span>
-                                                    <!--<span ng-show="britishSystem == 'on'">23884~54592 <span class="unitStyle">BTU/h</span></span>-->
-                                                </td>
-                                                <td>
-                                                    <input type="text" v-model="lengliang_a" placeholder="请输入冷量" class="advSelect" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th width="250">
-                                                    冷媒类型：
-                                                </th>
-                                                <td width="215">
-                                                    R410A,R134a,R22,R32,R290
-                                                </td>
-                                                <td>
-                                                    <select name="refri" class="advSelect" v-model="lengmei_a">
-                                                        <option value="-1">不限</option>
-                                                        <option value="R410A">R410A</option>
-                                                        <option value="R134A">R134A</option>
-                                                        <option value="R22">R22</option>
-                                                        <option value="R32">R32</option>
-                                                        <option value="R290">R290</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th width="250">
-                                                    测试工况：
-                                                </th>
-                                                <td width="215">
-                                                    默认为 ASHRAE/T
-                                                </td>
-                                                <td>
-                                                    <select name="refri" class="advSelect" v-model="capMeasCond_a">
-                                                        <option value="-1" ng-selected="true">不限</option>
-                                                        <option value="ASHRAE/T">ASHRAE/T</option>
-                                                        <option value="高效工况">高效工况</option>
-                                                        <option value="冷房定格">冷房定格</option>
-                                                        <option value="冷房中间">冷房中间</option>
-                                                        <option value="暖房定格">暖房定格</option>
-                                                        <option value="暖房中间">暖房中间</option>
-                                                        <option value="低温制热">低温制热</option>
-                                                        <option value="最大制冷">最大制冷</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th width="250">
-                                                    单位系统：
-                                                </th>
-                                                <td width="215">
-                                                    <span>公制 或 英制</span>
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        <select name="" class="advSelect" style="width:60px;" id="">
-                                                            <option value="off">公制</option>
-                                                            <option value="on">英制</option>
-                                                        </select>
-                                                    </span>
-                                                </td>
-                                            </tr>
+                                            {{powerFrequency.model}}{{powerPhase.model}} {{lengliang.model}} {{lengmei.model}} {{capMeasCond.model}}
+                                            <hiFormCheckBox :title="productTerritory.title" :description="productTerritory.description" :options="productTerritory.options" v-model="productTerritory.model">
+                                            </hiFormCheckBox>
+                                            <hiFormDropDown :title="productType.title" :description="productType.description" :options="productType.options" v-model="productType.model">
+                                            </hiFormDropDown>
+                                            <hiFormDropDown :title="powerVoltage.title" :description="powerVoltage.description" :options="powerVoltage.options" v-model="powerVoltage.model">
+                                            </hiFormDropDown>
+                                            <hiFormRadioSet name="_powerFrequency" :title="powerFrequency.title" :description="powerFrequency.description" :options="powerFrequency.options" v-model="powerFrequency.model">
+                                            </hiFormRadioSet>
+                                            <hiFormRadioSet name="_powerPhase" :title="powerPhase.title" :description="powerPhase.description" :options="powerPhase.options" v-model="powerPhase.model">
+                                            </hiFormRadioSet>
+                                            <hiFormRawInput :title="lengliang.title" :description="lengliang.description" :placeholder="lengliang.placeholder" lengliangUnit="W" v-model="lengliang.model">
+                                            </hiFormRawInput>
+                                            <hiFormDropDown :title="lengmei.title" :description="lengmei.description" :options="lengmei.options" v-model="lengmei.model">
+                                            </hiFormDropDown>
+                                            <hiFormDropDown :title="capMeasCond.title" :description="capMeasCond.description" :options="capMeasCond.options" :customizedStyle="capMeasCond.customizedStyle" v-model="capMeasCond.model">
+                                            </hiFormDropDown>
+                                            <hiFormDropDown :title="unitSystem.title" :description="unitSystem.description" :options="unitSystem.options" :customizedStyle="unitSystem.customizedStyle" v-model="unitSystem.model">
+                                            </hiFormDropDown>
                                             <tr>
                                                 <th>
                                                     &nbsp;
@@ -125,7 +41,7 @@
                                                     &nbsp;
                                                 </td>
                                                 <td id="adv-setting-7">
-                                                    <hiButton v-on:click.native="testInvoke()"></hiButton>
+                                                    <hiButton buttonText="高级搜索" v-on:click.native="testInvoke()"></hiButton>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -146,53 +62,85 @@ import globalConsts from './globalConsts.vue';
 import queries from './queries.vue';
 export default {
     name: 'advSearchForm',
-     data(){
+    data() {
         return {
-            powerVoltage_a:'-1',
-            powerFrquency_a:'-1',
-            powerPhase_a:'-1',
-            lengliang_a:'',
-            lengliangUnit_a:'W',
-            lengmei_a:'-1',
-            capMeasCond_a:'-1',
-            serverUrl:globalConsts.serverUrl,
-            productTerritory:{
-                model:['轻商','家用'],
-                title:'应用领域：',
-                description:'轻商，家用',
-                options:[{name:'轻商',checked:true,value:'轻商'},{name:'家用',checked:true,value:'家用'}]
+            powerVoltage_a: '-1',
+            powerFrquency_a: '-1',
+            powerPhase_a: '-1',
+            lengliang_a: '',
+            lengliangUnit_a: 'W',
+            lengmei_a: '-1',
+            capMeasCond_a: '-1',
+            serverUrl: globalConsts.serverUrl,
+            productTerritory: {
+                model: ['轻商', '家用'],
+                title: '应用领域：',
+                description: '轻商，家用',
+                options: [{ name: '轻商', checked: true, value: '轻商' }, { name: '家用', checked: true, value: '家用' }]
             },
-            productType:{
-                model:'-1',
-                title:'产品类型：',
-                description:'定速，变频',
-                options:[{name:'不限',value:'-1'},{name:'定速',value:'定速'},{name:'变频',value:'变频'}]
+            productType: {
+                model: '-1',
+                title: '产品类型：',
+                description: '定速，变频',
+                options: [{ name: '不限', value: '-1' }, { name: '定速', value: '定速' }, { name: '变频', value: '变频' }]
             },
-            powerVoltage:{
-                model:'-1',
-                title:'电源-电压：',
-                description:'208V-230V~ 到 380V-415V~',
-                options:[{name:'不限',value:'-1'},{name:'208V-230V~',value:'208V-230V~'},{name:'220V-230V~',value:'220V-230V~'},{name:'220V-240V~',value:'220V-240V~'},{name:'220V-380V~',value:'220V/380V'},{name:'220V~',value:'220V~'},{name:'230V~',value:'230V~'},{name:'380V~',value:'380V~'},{name:'380V-415V~',value:'380V-415V~'}]
+            powerVoltage: {
+                model: '-1',
+                title: '电源-电压：',
+                description: '208V-230V~ 到 380V-415V~',
+                options: [{ name: '不限', value: '-1' }, { name: '208V-230V~', value: '208V-230V~' }, { name: '220V-230V~', value: '220V-230V~' }, { name: '220V-240V~', value: '220V-240V~' }, { name: '220V-380V~', value: '220V/380V' }, { name: '220V~', value: '220V~' }, { name: '230V~', value: '230V~' }, { name: '380V~', value: '380V~' }, { name: '380V-415V~', value: '380V-415V~' }]
             },
-            powerFrequency:{
-                model:'-1',
-                title:'电源-频率：',
-                description:'50Hz~60Hz',
-                options:[{name:'不限',checked:true,value:'-1'},{name:'50Hz',checked:false,value:'50Hz'},{name:'50/60Hz',checked:false,value:'50/60Hz'},{name:'60Hz',checked:false,value:'60Hz'}]
+            powerFrequency: {
+                model: '-1',
+                title: '电源-频率：',
+                description: '50Hz~60Hz',
+                options: [{ name: '不限', checked: true, value: '-1' }, { name: '50Hz', checked: false, value: '50Hz' }, { name: '50/60Hz', checked: false, value: '50/60Hz' }, { name: '60Hz', checked: false, value: '60Hz' }]
 
+            },
+            powerPhase: {
+                model: '-1',
+                title: '电源-相数：',
+                description: '单相, 单相或三相, 三相',
+                options: [{ name: '不限', checked: true, value: '-1' }, { name: '单相', checked: false, value: '1' }, { name: '单相或三相', checked: false, value: '1/3' }, { name: '三相', checked: false, value: '3' }]
+
+            },
+            lengliang: {
+                model: '',
+                title: '冷量：',
+                description: '7000-16000',
+                placeholder: '请输入冷量',
+            },
+            lengmei: {
+                model: '-1',
+                title: '冷媒类型：',
+                description: 'R410A,R134a,R22,R32,R290',
+                options: [{ name: '不限', value: '-1' }, { name: 'R410A', value: 'R410A' }, { name: 'R134A', value: 'R134A' }, { name: 'R22', value: 'R22' }, { name: 'R32', value: 'R32' }, { name: 'R410a', value: 'R410a' }]
+            },
+            capMeasCond: {
+                model: '-1',
+                title: '测试工况：',
+                description: '默认为 ASHRAE/T',
+                options: [{ name: '不限', value: '-1' }, { name: 'ASHRAE/T', value: 'ASHRAE/T' }, { name: '高效工况', value: '高效工况' }, { name: '冷房定格', value: '冷房定格' }, { name: '冷房中间', value: '冷房中间' }, { name: '暖房定格', value: '暖房定格' }, { name: '暖房中间', value: '暖房中间' }, { name: '低温制热', value: '低温制热' }, { name: '最大制冷', value: '最大制冷' }]
+            },
+            unitSystem: {
+                model: 'off',
+                title: ' 单位系统：',
+                description: '英制 或 公制',
+                customizedStyle: 'width:50px;',
+                options: [{ name: '公制', value: 'off' }, { name: '英制', value: 'on' }]
             }
         }
     },
-    methods:{
-        closeForm(name){
-            this.$store.commit('closeForm',name);
+    methods: {
+        closeForm(name) {
+            this.$store.commit('closeForm', name);
         },
-        testInvoke(){
+        testInvoke() {
             queries.test();
         }
     },
-    computed:{
-        advSearchOpened(){
+    computed: {
+        advSearchOpened() {
             return this.$store.state.advSearchOpened
         }
     }

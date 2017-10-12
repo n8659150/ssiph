@@ -4,6 +4,7 @@
 //   var tem = Math.round(Math.random() * colorListLength)
 //   return colorList[tem]
 // }
+
 import globalConsts from './globalConsts.vue'
 // 空参数过滤
 function setParams (value){
@@ -38,7 +39,7 @@ function paramsParser(paramlist){
 // 全局搜索
 function fuzzyQuery(keyword){
     var fullUrl = globalConsts.serverUrl + globalConsts.globalSearch + "fuzzyQuery=" + keyword +"&callback=JSON_CALLBACK";
-    return this.$http.get(fullUrl)
+    return this.$http.jsonp(fullUrl)
 }
 function queryById(id){
     var fullUrl = globalConsts.serverUrl + globalConsts.getProductsById + "id=" + id + "&callback=JSON_CALLBACK";
