@@ -39,16 +39,17 @@ export default {
     },
     fuzzyQuery() {
       var fullUrl = globalConsts.serverUrl + globalConsts.globalSearch + "fuzzyQuery=" + this.keywords;
-      this.$http.jsonp(fullUrl, { jsonp: "callback" }).then(
-        function successCallback(response) {
-          console.log("搜索执行成功！");
-          localStorage.searchResults = response.data.result;
-          console.log(localStorage.searchResults)
-        },
-        function errorCallback(response) {
-          console.log("搜索执行失败！");
-          console.log(response);
-        });
+        queries.fuzzyQuery(this.keywords).then(
+          function successCallback(response) {
+            console.log("搜索执行成功！");
+            localStorage.searchResults = response.data.result;
+            console.log(localStorage.searchResults)
+          },
+          function errorCallback(response) {
+            console.log("搜索执行失败！");
+            console.log(response);
+          });
+      // console.log(queries.fuzzyQuery(this.keywords));
     }
   }
 
