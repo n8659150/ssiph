@@ -1,6 +1,6 @@
 <template>
     <div>
-        <headerBar username="李 暘"></headerBar>
+        <headerBar></headerBar>
         <headerForms></headerForms>
     </div>
 </template>

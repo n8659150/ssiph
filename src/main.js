@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import Vuex from 'vuex'
 import mainContent from './components/mainContent.vue'
+import login from './components/login.vue'
+import mainResult from './components/mainResult.vue'
 import highlyUI from './components/highly-ui/'
 Vue.use(Vuex)
 Vue.use(VueResource)
@@ -17,8 +19,11 @@ Vue.use(highlyUI)
 // vuex store
 const store = new Vuex.Store({
   state: {
+    // headerFooterShouldHide:false,
     advSearchOpened: false,//高级搜索 
-    contactUsOpened: false //联系我们
+    contactUsOpened: false, //联系我们
+    username:'',
+    password:''
   },
   mutations: {
     // toggleAdvSearch(state) {
@@ -38,13 +43,21 @@ const store = new Vuex.Store({
     },
     closeForm(state, name) {
       state[name] = false;
+    },
+    setUserName(state,username) {
+      state.username = username;
+    },
+    setPassWord(state,password) {
+      state.password = password;
     }
   }
 })
 
 // router config
 const routes = [
-  { path: '/', component: mainContent }
+  { path: '/', name:'home', component: mainContent },
+  { path: '/list', name:'list', component: mainResult },
+  { path: '/login', name:'login', component: login }
   // { path: '/bar', component: Bar }
 ];
 const router = new VueRouter({

@@ -14,7 +14,6 @@
                                 <div class="result-setting">
                                     <table width="100%" cellspacing="0" cellpadding="0">
                                         <tbody>
-                                            {{powerFrequency.model}}{{powerPhase.model}} {{lengliang.model}} {{lengmei.model}} {{capMeasCond.model}}
                                             <hiFormCheckBox :title="productTerritory.title" :description="productTerritory.description" :options="productTerritory.options" v-model="productTerritory.model">
                                             </hiFormCheckBox>
                                             <hiFormDropDown :title="productType.title" :description="productType.description" :options="productType.options" v-model="productType.model">

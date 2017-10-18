@@ -262,7 +262,9 @@ button:disabled {
 	float: right;
 	margin-bottom: 15px;
 }
-
+.normalPosition {
+	position: static !important;
+}
 /*.rem_sub input.signupButton {
 	width: 309px;
 	height: 32px;
@@ -279,16 +281,17 @@ button:disabled {
 
 /* 登录页 */
 .loginWrapper {
-            position:absolute;
-            top:50%;
-            left:50%;
-            margin-top:-280.5px;
-            margin-left:-201.5px;
-            width: 403px;
-            /*margin: 0 auto;*/
-            height: 375px;
-            /*margin-top: 98px;*/
-        }
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	margin:auto;
+	width: 403px;
+	/*margin: 0 auto;*/
+	height: 375px;
+	/*margin-top: 98px;*/
+}
 
 .loginLogo {
 	text-align: center;
@@ -355,6 +358,12 @@ button:disabled {
 	font-size: 12px;
 	float: right;
 	margin-bottom: 15px;
+}
+.loginForm .version {
+	float: right;
+	margin-top:12px;
+	color: #333;
+	font-size:11px;
 }
 .rem_sub input.loginButton {
 	width: 309px;
@@ -743,9 +752,9 @@ button:disabled {
 		text-align: center;
 		font-size: 12px;
 		line-height: 24px;
-		position:fixed;
-		bottom:0;
-		width:100%
+		position: absolute;
+		bottom: 0;
+		width: 100%;
 	}
 } 
 @media all and (min-height:836px) and (max-height:959px){ 
@@ -1061,6 +1070,11 @@ button:disabled {
 	border:0;
 }
 
+.download-file-name {
+	font-size:16px;
+	margin-left:17px;
+	margin-right:27px;
+}
 /* 详情页 结束 */
 
 

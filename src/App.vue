@@ -9,11 +9,12 @@
     </p>-->
     <!--路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
-    <mainHeader v-show="msg == 'Welcome to Your Vue.js App'" username="李 暘"></mainHeader>
+    <mainHeader v-show="headerFooterShouldHide"></mainHeader>
     <!-- <headerForms></headerForms> -->
     <router-view></router-view>
-    <mainFooter></mainFooter>
+    <mainFooter v-show="headerFooterShouldHide" ></mainFooter>
   </div>
+  
 </template>
 
 <script>
@@ -24,6 +25,16 @@ export default {
   data() {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  computed:{
+    headerFooterShouldHide(){
+      console.log(this.$route.path);
+      if(this.$route.path == '/login' || this.$route.path == '/signup') {
+        return false
+      } else {
+        return true
+      }
     }
   },
   components: {

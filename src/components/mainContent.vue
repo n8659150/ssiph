@@ -38,7 +38,7 @@ export default {
         });
     },
     fuzzyQuery() {
-      var fullUrl = globalConsts.serverUrl + globalConsts.globalSearch + "fuzzyQuery=" + this.keywords;
+      // var fullUrl = globalConsts.serverUrl + globalConsts.globalSearch + "fuzzyQuery=" + this.keywords;
         queries.fuzzyQuery(this.keywords).then(
           function successCallback(response) {
             console.log("搜索执行成功！");

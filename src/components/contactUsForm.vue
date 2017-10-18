@@ -30,7 +30,7 @@
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    {{productType_c}}
+                                                    产品类型
                                                 </th>
                                                 <td>
                                                     定速，变频
