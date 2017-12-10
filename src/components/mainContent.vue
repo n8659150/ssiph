@@ -25,7 +25,7 @@ export default {
   methods: {
     fakeLogin() {
       // 模拟登录
-      var loginUrl = 'http://210.13.98.37:8080/hpiss/user/login.action?loginName=useradmin&acctPswd=useradmin'
+      var loginUrl = 'http://172.18.88.189:8080/hpiss/user/login.action?loginName=useradmin&acctPswd=useradmin'
       this.$http.jsonp(loginUrl, { jsonp: "callback" }).then(
         function successCallback(response) {
           console.log("登录成功");
@@ -39,11 +39,14 @@ export default {
     },
     fuzzyQuery() {
       // var fullUrl = globalConsts.serverUrl + globalConsts.globalSearch + "fuzzyQuery=" + this.keywords;
-        queries.fuzzyQuery(this.keywords).then(
+        let self = this;
+        queries.fuzzyQuery(self.keywords).then(
           function successCallback(response) {
             console.log("搜索执行成功！");
-            localStorage.searchResults = response.data.result;
-            console.log(localStorage.searchResults)
+            console.log(response.data.result)
+            localStorage.setItem('searchResults',JSON.stringify(response.data.result));
+            self.$router.push('/list')
+
           },
           function errorCallback(response) {
             console.log("搜索执行失败！");
