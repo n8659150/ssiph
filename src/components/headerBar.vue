@@ -41,9 +41,8 @@ export default {
             let _this = this;
             auth.userLogout(_this.$store.userName, _this.$store.passWord).then(
                 function successCallback(response) {
-                    console.log(response.data);
-                    localStorage.clear();
                     _this.$router.push({ path: '/login' });
+                    localStorage.clear();
                 },
                 function errorCallback(response) {
                     console.log(response);
@@ -55,14 +54,14 @@ export default {
     },
     computed:{
         username(){
-            return this.$store.state.username;
+            return localStorage.getItem('userName');
         }
     },
-    mounted(){
-        console.log(1);
-        this.$store.commit('setUserName',localStorage.getItem('userName'));
-        this.$store.commit('setPassWord',localStorage.getItem('acctPswd'));
-    }
+    // mounted(){
+    //     console.log(1);
+    //     this.$store.commit('setUserName',localStorage.getItem('userName'));
+    //     this.$store.commit('setPassWord',localStorage.getItem('acctPswd'));
+    // }
 }
 </script>
 

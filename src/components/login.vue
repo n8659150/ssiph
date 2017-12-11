@@ -35,89 +35,91 @@
 </template>
 
 <script>
-import queries from './queries.vue'
-import auth from './auth.vue'
-import globalConsts from './globalConsts.vue'
-import loginFooter from './loginFooter.vue'
+import queries from "./queries.vue";
+import auth from "./auth.vue";
+import globalConsts from "./globalConsts.vue";
+import loginFooter from "./loginFooter.vue";
 export default {
-  name: 'mainContent',
+  name: "mainContent",
   components: {
     loginFooter
   },
   data() {
     return {
-      message:'',
-      userName:'',
-      acctPswd:'',
-      uNFocused:false,
-      pWfocused:false,
-      userExist:1,
-      footerText:"2016-2017 海立集团© 版权所有",
-      version:'v0.10'
-    }
+      message: "",
+      userName: "",
+      acctPswd: "",
+      uNFocused: false,
+      pWfocused: false,
+      userExist: 1,
+      footerText: "2016-2017 海立集团© 版权所有",
+      version: "v0.10"
+    };
   },
-  computed:{
-    loginStatus(){
-      return localStorage.loginStatus.resultType
+  computed: {
+    loginStatus() {
+      return localStorage.loginStatus.resultType;
     },
-    shouldBtnDisabled(){
-      if((this.userName.length <= 5) || (this.acctPswd.length <= 5)) {
-        return true
-      }else {
-        return false
+    shouldBtnDisabled() {
+      if (this.userName.length <= 5 || this.acctPswd.length <= 5) {
+        return true;
+      } else {
+        return false;
       }
     }
   },
   methods: {
-    clearMsg(){
-      this.message = '';
+    clearMsg() {
+      this.message = "";
     },
-    gotoHomePage(){
-      this.$router.push({path:'/'});
+    gotoHomePage() {
+      this.$router.push({ path: "/" });
     },
-    boolUser(username){
+    boolUser(username) {
       console.log(username);
     },
-    login(userName,acctPswd){
-      let _this = this;
-      auth.userLogin(userName,acctPswd).then(
-          function successCallback(response) {
-            // localStorage.loginResult = response.data.result;
-            // localStorage.loginStatus = response.data;
-            console.log(response.data);
-            // localStorage.userInfo = response.data.result;
-            // console.log(localStorage.userInfo);
-            switch (response.data.resultType){
-              // 登录成功，将信息存到本地
-              case '0':
-                localStorage.setItem('userName',_this.userName);
-                localStorage.setItem('acctPswd',_this.acctPswd);
-                localStorage.setItem('loginStatus',JSON.stringify(response.data));
-                localStorage.setItem('userInfo',JSON.stringify(response.data.result));
-                _this.$store.commit('setUserName',localStorage.getItem('userName'));
-                _this.$store.commit('setPassWord',localStorage.getItem('acctPswd'));
-                _this.message = response.data.message;
-                setTimeout(_this.gotoHomePage,1000);
-                break;
-              default:
-                _this.message = response.data.message;
-                setTimeout(_this.clearMsg,1000);
-                break;
-            }
-            
-            // console.log(localStorage.loginResult);
-          },
-          function errorCallback(response) {
-            console.log("登录失败！");
-            console.log(response);
-          })
+    login(userName, acctPswd) {
+      auth.userLogin(userName, acctPswd).then(
+        response => {
+          switch (response.data.resultType) {
+            // 登录成功，将信息存到本地
+            case "0":
+              localStorage.setItem("userName", this.userName);
+              localStorage.setItem(
+                "loginStatus",
+                JSON.stringify(response.data)
+              );
+              localStorage.setItem(
+                "userInfo",
+                JSON.stringify(response.data.result)
+              );
+              localStorage.setItem(
+                "isLogin",
+                true
+              )
+              // this.$store.commit(
+              //   "setUserName",
+              //   localStorage.getItem("userName")
+              // );
+              this.message = response.data.message;
+              setTimeout(this.gotoHomePage, 1000);
+              break;
+            default:
+              this.message = response.data.message;
+              setTimeout(this.clearMsg, 1000);
+              break;
+          }
+        },
+        response => {
+          this.message = response.data.message;
+        }
+      );
     }
-
   }
   // created(){
 
   // }
-}
+};
 </script>
 
 <style>

@@ -25,34 +25,23 @@ const store = new Vuex.Store({
     advSearchOpened: false,//高级搜索 
     contactUsOpened: false, //联系我们
     showRecommendedResults:true, //展示推荐机种 / 展示所有机种
-    showAllResults:false,
-    username:'',
-    password:''
+    showAllResults:false
   },
   mutations: {
-    // toggleAdvSearch(state) {
-    //   state.advSearchOpened = !state.advSearchOpened
+    // setUserName(state,username) {
+    //   state.username = username;
     // },
-    // closeAdvSearch(state) {
-    //   state.advSearchOpened = false;
+    // setPassWord(state,password) {
+    //   state.password = password;
     // },
-    // toggleContactUs(state) {
-    //   state.contactUsOpened = !state.contactUsOpened
-    // },
-    // closeContactUs(state) {
-    //   state.contactUsOpened = false;
-    // },
+    updateLoginStatus(state,loginStatus) {
+      state.loginStatus = loginStatus
+    },
     toggleForm(state, name) {
       state[name] = !state[name];
     },
     closeForm(state, name) {
       state[name] = false;
-    },
-    setUserName(state,username) {
-      state.username = username;
-    },
-    setPassWord(state,password) {
-      state.password = password;
     },
     toggleSearchResults(state,whichOne) {
       state.showRecommendedResults = false;

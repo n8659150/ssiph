@@ -218,44 +218,66 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations, mapState } from 'vuex';
+import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
+import auth from "./auth.vue";
 export default {
-	name: 'mainResult',
-	data() {
-		return {
-			searchResults: JSON.parse(localStorage.getItem('searchResults')),
-			current: 1,
-			total: JSON.parse(localStorage.getItem('searchResults')).length,
-			display: 7,
-		}
+  name: "mainResult",
+  data() {
+    return {
+      searchResults: localStorage['searchResults']?JSON.parse(localStorage.getItem("searchResults")):this.$router.push('/login'),
+      current: 1,
+      total: localStorage['searchResults']?JSON.parse(localStorage.getItem("searchResults")).length:this.$router.push('/login'),
+      display: 7
+    };
+  },
+  components: {},
+  methods: {
+    pagechange(currentPage) {
+      this.current = currentPage;
+    },
+    toggleSearchResults(recommended_OR_all) {
+      this.$store.commit("toggleSearchResults", recommended_OR_all);
+    }
+  },
+  computed: {
+    recommendedResults() {
+	//   return typeof(this.searchResults) === 'object'?(this.searchResults.slice(0, this.display)):(this.$router.push('/login'));
+		return this.searchResults.slice(0,this.display)
+    },
+    currentSearchResults() {
+      let startIndex = this.display * this.current - this.display;
+      let endIndex = this.display * this.current;
+      return this.searchResults.slice(startIndex, endIndex);
+    },
+    showRecommendedResults() {
+      return this.$store.state.showRecommendedResults;
+    },
+    showAllResults() {
+      return this.$store.state.showAllResults;
 	},
-	components: {
-	},
-	methods: {
-		pagechange(currentPage) {
-			this.current = currentPage
-		},
-		toggleSearchResults(recommended_OR_all){
-			this.$store.commit('toggleSearchResults', recommended_OR_all)
-		}
-	},
-	computed: {
-		recommendedResults() {
-			return this.searchResults.slice(0,this.display);
-		},
-		currentSearchResults() {
-			let startIndex = this.display * this.current - this.display;
-			let endIndex = this.display * this.current
-			return this.searchResults.slice(startIndex, endIndex);
-		},
-		showRecommendedResults() {
-            return this.$store.state.showRecommendedResults
-        },
-		showAllResults() {
-            return this.$store.state.showAllResults
-        }
+	loginStatus() {
+	  return this.$store.state.loginStatus;
 	}
-}
+  },
+
+  mounted() {
+    auth
+      .isUserLogin()
+	//   .then(res => localStorage.setItem("isLogin", res.data.result));
+	    .then(
+			res => this.$store.commit(
+                "updateLoginStatus",
+                res.data.result
+              )
+		)
+	console.log("localStroage's length is",localStorage.length)
+	if (!localStorage['searchResults']) {
+		
+		this.$router.push('/login')
+	}
+  }
+  
+};
 </script>
 
 <style>
