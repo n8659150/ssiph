@@ -39,8 +39,9 @@ function isUserLogin() {
 }
 
 // session 验证 （本地）
-function localIsUserLogin(username){
-   return username === 'useradmin'?true:false
+function localIsUserLogin(){
+//    return username === 'useradmin'?true:false
+    return fetch('../../json/isUserLogin.json')
     // return false
 }
 export default

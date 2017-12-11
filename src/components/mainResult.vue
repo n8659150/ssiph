@@ -219,6 +219,7 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations, mapState } from 'vuex';
+import auth from './auth.vue'
 export default {
 	name: 'mainResult',
 	data() {
@@ -254,6 +255,11 @@ export default {
 		showAllResults() {
             return this.$store.state.showAllResults
         }
+	},
+	mounted(){
+		auth.localIsUserLogin()
+		.then((res) => res.json())
+		.then((data) => data.result === true?(console.log('still online')):(this.$router.push('/login')))
 	}
 }
 </script>

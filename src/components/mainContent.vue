@@ -4,8 +4,8 @@
       <div class="search_index">
         <a class="logo logo_cn"></a>
         <div class="search_bar">
-          <!-- <input type="text" v-model="keywords" class="search_key" @click="fakeLogin()" placeholder="输入图号或机种名搜索" /> -->
-          <input type="text" v-model="keywords" class="search_key" placeholder="输入图号或机种名搜索" />
+          <!--<input type="text" v-model="keywords" class="search_key" @click="fakeLogin()" placeholder="输入图号或机种名搜索" /> -->
+          <input type="text" v-model="keywords" class="search_key" placeholder="输入图号或机种名搜索" /> 
           <button class="search_btn" @click="fuzzyQuery()"></button>
         </div>
       </div>
@@ -27,7 +27,7 @@ export default {
   methods: {
     fakeLogin() {
       // 模拟登录
-      var loginUrl = 'http://172.18.88.189:8080/hpiss/user/login.action?loginName=useradmin&acctPswd=useradmin'
+      var loginUrl = 'http://210.13.98.37:8080/hpiss/user/login.action?loginName=useradmin&acctPswd=useradmin'
       this.$http.jsonp(loginUrl, { jsonp: "callback" }).then(
         function successCallback(response) {
           console.log("登录成功");
@@ -69,11 +69,10 @@ export default {
     // }
   },
   mounted(){
-    let isOnline = auth.localIsUserLogin('useradmin');
-    console.log(isOnline);
-    // isOnline?(console.log('still online')):(this.$router.push('/login'));
+    auth.localIsUserLogin()
+    .then((res) => res.json())
+    .then((data) => data.result === true?(console.log('still online')):(this.$router.push('/login')))
   }
-
 }
 </script>
 
