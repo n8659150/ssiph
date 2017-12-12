@@ -10,11 +10,11 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 // 空参数过滤
-function setParams (value){
-    if(value === null || value === undefined || value == -1 || value.length == 0){
-        console.log("value is null")
-        return;
-    }
+function splitArrayParams (value){
+    // if(value === null || value === undefined || value == -1 || value.length === 0){
+    //     console.log("value is null")
+    //     return;
+    // }
     if (value.hasOwnProperty("push")){
         if (value.length == 1){
             console.log(value[0]);
@@ -30,7 +30,7 @@ function setParams (value){
 function paramsParser(paramlist){
     var registerParams = [];
     for (var key in paramlist) {
-        if(paramlist[key] === null || paramlist[key] === undefined || paramlist[key] == -1){
+        if(paramlist[key] === null || paramlist[key] === undefined || paramlist[key] == -1 || paramlist[key].length === 0){
             continue;
         }
         var temp = key + '=' + paramlist[key];
@@ -80,7 +80,7 @@ export default
   fuzzyQuery,
   queryById,
   paramsParser,
-  setParams,
+  splitArrayParams,
   advQuery,
   toPM,
   performanceCurve,

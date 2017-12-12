@@ -97,10 +97,10 @@ export default {
                 "isLogin",
                 true
               )
-              // this.$store.commit(
-              //   "setUserName",
-              //   localStorage.getItem("userName")
-              // );
+              this.$store.commit(
+                "setUserName",
+                localStorage.getItem("userName")
+              );
               this.message = response.data.message;
               setTimeout(this.gotoHomePage, 1000);
               break;

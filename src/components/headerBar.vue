@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations, mapState } from 'vuex';
+// import { mapGetters, mapActions, mapMutations, mapState } from 'vuex';
 import auth from './auth.vue'
 export default {
     name: 'headerBar',
@@ -38,10 +38,10 @@ export default {
             this.$store.commit('toggleForm', name)
         },
         logout() {
-            let _this = this;
-            auth.userLogout(_this.$store.userName, _this.$store.passWord).then(
+            let self = this;
+            auth.userLogout(self.$store.userName, self.$store.passWord).then(
                 function successCallback(response) {
-                    _this.$router.push({ path: '/login' });
+                    self.$router.push({ path: '/login' });
                     localStorage.clear();
                 },
                 function errorCallback(response) {
@@ -54,14 +54,12 @@ export default {
     },
     computed:{
         username(){
-            return localStorage.getItem('userName');
+            return this.$store.state.username
         }
     },
-    // mounted(){
-    //     console.log(1);
-    //     this.$store.commit('setUserName',localStorage.getItem('userName'));
-    //     this.$store.commit('setPassWord',localStorage.getItem('acctPswd'));
-    // }
+    mounted(){
+        this.$store.commit('setUserName',localStorage.getItem('userName'));
+    }
 }
 </script>
 

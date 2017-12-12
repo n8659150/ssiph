@@ -42,13 +42,12 @@ export default {
           console.log(response);
         }
       );
-      // console.log(queries.fuzzyQuery(this.keywords));
     }
   },
   mounted() {
     auth
       .isUserLogin()
-      .then(res => console.log(res.data), res => console.log(res));
+      .then(res => (res.data.resultType === '1')?(this.$router.push('/login')):(res.data), res => console.log(res));
       if (localStorage.length === 0) {
 		    this.$router.push('/login')
 	    }

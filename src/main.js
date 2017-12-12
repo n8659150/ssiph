@@ -25,12 +25,13 @@ const store = new Vuex.Store({
     advSearchOpened: false,//高级搜索 
     contactUsOpened: false, //联系我们
     showRecommendedResults:true, //展示推荐机种 / 展示所有机种
-    showAllResults:false
+    showAllResults:false,
+    username:''
   },
   mutations: {
-    // setUserName(state,username) {
-    //   state.username = username;
-    // },
+    setUserName(state,username) {
+      state.username = username;
+    },
     // setPassWord(state,password) {
     //   state.password = password;
     // },

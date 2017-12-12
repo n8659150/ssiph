@@ -5,7 +5,7 @@
         </th>
         <td width="215">
             <span>{{description}}
-                <span class="unitStyle"> {{lengliangUnit}}</span>
+                <span class="unitStyle">{{lengliangUnit}}</span>
             </span>
             <!--<span ng-show="britishSystem == 'on'">23884~54592 <span class="unitStyle">BTU/h</span></span>-->
         </td>
