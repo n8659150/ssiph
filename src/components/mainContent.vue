@@ -24,11 +24,9 @@ export default {
     };
   },
   methods: {
-    fuzzyQuery() {
-      // var fullUrl = globalConsts.serverUrl + globalConsts.globalSearch + "fuzzyQuery=" + this.keywords;
-      // let self = this;
-      (async function _(self){
-        let response = await queries.fuzzyQuery(self.keywords);
+    async fuzzyQuery() {
+      
+        let response = await queries.fuzzyQuery(this.keywords);
         if(!response) {
           return 
         } else {
@@ -37,22 +35,21 @@ export default {
             "searchResults",
             JSON.stringify(response.data.result)
           );
-          self.$router.push("/list");
+          this.$router.push("/list");
         }
-      })(this)
     }
   },
   mounted() {
     (async function loginCheck(self) {
-      
       let response = await auth.isUserLogin();
       if(!response) {
         return
       } else {
-        (response.data.resultType === '1')?self.$router.push('/login'):(console.log(response.data.message))
+        (response.data.resultType === '1')?(self.$router.push('/login')):(console.log(response.data.message))
       }
       
     })(this)
+    
   }
 
 };
