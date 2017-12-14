@@ -85,7 +85,7 @@
 									<div ng-show="(([$storage.searchResults] | filter:modelFilter).length == 0) && showAll.active == true" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
 										<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle">{{'KEYWORDCHECK' | translate}}</a>
 									</div> -->
-									<tr v-show="showRecommendedResults" class="list-table-tr" v-for="(result,key,index) in recommendedResults" :key="key">
+									<tr v-show="showRecommendedResults" class="list-table-tr" v-for="(result,key,index) in recommendedResults">
 										<!-- 名称 -->
 										<td class="list-table-td col-wd-150">
 											<div>
@@ -146,7 +146,7 @@
 									</tr>
 
 
-									<tr v-show="showAllResults" class="list-table-tr" v-for="(result,key,index) in currentSearchResults" :key="key">
+									<tr v-show="showAllResults" class="list-table-tr" v-for="(result,key,index) in currentSearchResults">
 										<!-- 名称 -->
 										<td class="list-table-td col-wd-150">
 											<div>

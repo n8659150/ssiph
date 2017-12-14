@@ -1,10 +1,4 @@
 <script type="text/javascript">
-// const colorListLength = 20
-// function getRandColor () {
-//   var tem = Math.round(Math.random() * colorListLength)
-//   return colorList[tem]
-// }
-
 import globalConsts from './globalConsts.vue'
 import Vue from 'vue'
 import VueResource from 'vue-resource'

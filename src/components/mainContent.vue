@@ -26,31 +26,33 @@ export default {
   methods: {
     fuzzyQuery() {
       // var fullUrl = globalConsts.serverUrl + globalConsts.globalSearch + "fuzzyQuery=" + this.keywords;
-      let self = this;
-      queries.fuzzyQuery(self.keywords).then(
-        function successCallback(response) {
-          console.log("搜索执行成功！");
-          console.log(response.data.result);
+      // let self = this;
+      (async function _(self){
+        let response = await queries.fuzzyQuery(self.keywords);
+        if(!response) {
+          return 
+        } else {
+          let result = response.data.result
           localStorage.setItem(
             "searchResults",
             JSON.stringify(response.data.result)
           );
           self.$router.push("/list");
-        },
-        function errorCallback(response) {
-          console.log("搜索执行失败！");
-          console.log(response);
         }
-      );
+      })(this)
     }
   },
   mounted() {
-    auth
-      .isUserLogin()
-      .then(res => (res.data.resultType === '1')?(this.$router.push('/login')):(res.data), res => console.log(res));
-      if (localStorage.length === 0) {
-		    this.$router.push('/login')
-	    }
+    (async function loginCheck(self) {
+      
+      let response = await auth.isUserLogin();
+      if(!response) {
+        return
+      } else {
+        (response.data.resultType === '1')?self.$router.push('/login'):(console.log(response.data.message))
+      }
+      
+    })(this)
   }
 
 };

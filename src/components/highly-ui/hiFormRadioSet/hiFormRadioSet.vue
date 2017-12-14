@@ -22,7 +22,7 @@
         </td>
         <td id="adv-setting-6">
             <label v-for="(option,key) in options" :key="key">
-                <input :name="name" :id="key" :checked="option.checked" :value="option.value" class="radio" type="radio" v-on:change="updateInput($event.target.value)">{{option.name}}
+                <input :name="name" :checked="option.checked" :value="option.value" class="radio" type="radio" v-on:change="updateInput($event.target.value)">{{option.name}}
             </label>
         </td>
     </tr>
