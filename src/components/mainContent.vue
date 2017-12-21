@@ -25,31 +25,33 @@ export default {
   },
   methods: {
     async fuzzyQuery() {
+      // var fullUrl = globalConsts.serverUrl + globalConsts.globalSearch + "fuzzyQuery=" + this.keywords;
+      let self = this;
+      let response = await queries.fuzzyQuery(self.keywords)
+      if(!response) {
+        return 
+      } else {
+        let result = response.data.result
+        // this.$store.commit('updateSearchResults',result)
+        localStorage.setItem(
+          "searchResults",
+          JSON.stringify(result)
+        );
+        this.$store.commit('updateSearchResults',result)
+        self.$router.push("/list");
+        // console.log(this.$store.state.searchResults)
+      }
       
-        let response = await queries.fuzzyQuery(this.keywords);
-        if(!response) {
-          return 
-        } else {
-          let result = response.data.result
-          localStorage.setItem(
-            "searchResults",
-            JSON.stringify(response.data.result)
-          );
-          this.$router.push("/list");
-        }
+
     }
   },
   mounted() {
-    (async function loginCheck(self) {
-      let response = await auth.isUserLogin();
-      if(!response) {
-        return
-      } else {
-        (response.data.resultType === '1')?(self.$router.push('/login')):(console.log(response.data.message))
-      }
-      
-    })(this)
-    
+    auth
+      .isUserLogin()
+      .then(res => (res.data.resultType === '1')?(this.$router.push('/login')):(res.data), res => console.log(res));
+        if (localStorage.length === 0) {
+          this.$router.push('/login')
+        }
   }
 
 };

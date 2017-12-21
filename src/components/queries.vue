@@ -40,13 +40,13 @@ function fuzzyQuery(keyword){
 }
 function queryById(id){
     var fullUrl = globalConsts.serverUrl + globalConsts.getProductsById + "id=" + id + "&callback=JSON_CALLBACK";
-    return this.$http.jsonp(fullUrl)
+    return $http.jsonp(fullUrl)
 }
 
 // 高级搜索
 function advQuery(params){
-    var fullUrl  = globalConsts.serverUrl + globalConsts.showProducts + params.join('&') + "&callback=JSON_CALLBACK";
-    return $http.jsonp(fullUrl)
+    var fullUrl  = globalConsts.serverUrl + globalConsts.showProducts + params.join('&');
+    return Vue.http.jsonp(fullUrl, { jsonp: "callback"})
 }
 // 提交用户留言和信息给产品经理
 function toPM(params){

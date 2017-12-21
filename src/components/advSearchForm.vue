@@ -137,11 +137,23 @@ export default {
         closeForm(name) {
             this.$store.commit('closeForm', name);
         },
-        advQuery() {
+        async advQuery() {
             // 应用领域可能是多选，检查参数是否是列表，是列表就以逗号隔开
             this.models['productTerritory'] = queries.splitArrayParams(this.models['productTerritory'])
             let advParams = queries.paramsParser(this.models);
-            // TODO：调用queries.advQuery(advParams)    
+            let response = await queries.advQuery(advParams);
+            if(!response) {
+                return 
+            } else {
+                this.closeForm('advSearchOpened');
+                let result = response.data.result
+                localStorage.setItem(
+                    'searchResults',
+                    JSON.stringify(result)
+                    );
+                this.$store.commit('updateSearchResults',result)
+                this.$router.push('/list');
+            }
         }
 
     },
@@ -149,7 +161,7 @@ export default {
         advSearchOpened() {
             return this.$store.state.advSearchOpened
         }
-    }
+    },
 }
   // data () {
   //   return {

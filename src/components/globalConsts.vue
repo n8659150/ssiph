@@ -1,6 +1,6 @@
 <script type="text/javascript">
-// const serverUrl = 'http://172.18.88.189:8080/';
-const serverUrl = "http://210.13.98.37:8080/";
+const serverUrl = 'http://172.18.88.189:8080/';
+// const serverUrl = "http://210.13.98.37:8080/";
 // 用户唯一性判断
 const booleanUser = "hpiss/user/boolearnUser.action?";
 // 用户注册

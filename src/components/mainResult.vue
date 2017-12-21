@@ -76,16 +76,16 @@
 							<table class="tablebox">
 								<tbody class="list-table-tbody">
 									<!-- <div ng-show="$storage.searchResults.length == 0 || $storage.resultType != 0" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
-										<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle"
-										 ui-sref="frame.home">{{'SEARCHAGAIN' | translate}}</a>
-									</div>
-									<div ng-show="(([$storage.recommendedResults] | filter:modelFilter).length == 0) && showRecommended.active == true" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
-										<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle">{{'KEYWORDCHECK' | translate}}</a>
-									</div>
-									<div ng-show="(([$storage.searchResults] | filter:modelFilter).length == 0) && showAll.active == true" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
-										<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle">{{'KEYWORDCHECK' | translate}}</a>
-									</div> -->
-									<tr v-show="showRecommendedResults" class="list-table-tr" v-for="(result,key,index) in recommendedResults">
+											<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle"
+											 ui-sref="frame.home">{{'SEARCHAGAIN' | translate}}</a>
+										</div>
+										<div ng-show="(([$storage.recommendedResults] | filter:modelFilter).length == 0) && showRecommended.active == true" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
+											<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle">{{'KEYWORDCHECK' | translate}}</a>
+										</div>
+										<div ng-show="(([$storage.searchResults] | filter:modelFilter).length == 0) && showAll.active == true" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
+											<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle">{{'KEYWORDCHECK' | translate}}</a>
+										</div> -->
+									<tr v-show="showRecommendedResults" class="list-table-tr" v-for="(result,key,index) in recommendedResults" :key="key">
 										<!-- 名称 -->
 										<td class="list-table-td col-wd-150">
 											<div>
@@ -145,8 +145,7 @@
 										</td>
 									</tr>
 
-
-									<tr v-show="showAllResults" class="list-table-tr" v-for="(result,key,index) in currentSearchResults">
+									<tr v-show="showAllResults" class="list-table-tr" v-for="(result,key,index) in currentSearchResults" :key="key">
 										<!-- 名称 -->
 										<td class="list-table-td col-wd-150">
 											<div>
@@ -221,63 +220,64 @@
 import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
 import auth from "./auth.vue";
 export default {
-  name: "mainResult",
-  data() {
-    return {
-      searchResults: localStorage['searchResults']?JSON.parse(localStorage.getItem("searchResults")):this.$router.push('/login'),
-      current: 1,
-      total: localStorage['searchResults']?JSON.parse(localStorage.getItem("searchResults")).length:this.$router.push('/login'),
-      display: 7
-    };
-  },
-  components: {},
-  methods: {
-    pagechange(currentPage) {
-      this.current = currentPage;
-    },
-    toggleSearchResults(recommended_OR_all) {
-      this.$store.commit("toggleSearchResults", recommended_OR_all);
-    }
-  },
-  computed: {
-    recommendedResults() {
-	//   return typeof(this.searchResults) === 'object'?(this.searchResults.slice(0, this.display)):(this.$router.push('/login'));
-		return this.searchResults.slice(0,this.display)
-    },
-    currentSearchResults() {
-      let startIndex = this.display * this.current - this.display;
-      let endIndex = this.display * this.current;
-      return this.searchResults.slice(startIndex, endIndex);
-    },
-    showRecommendedResults() {
-      return this.$store.state.showRecommendedResults;
-    },
-    showAllResults() {
-      return this.$store.state.showAllResults;
+	name: "mainResult",
+	data() {
+		return {
+			current: 1,
+			display: 7
+		};
 	},
-	loginStatus() {
-	  return this.$store.state.loginStatus;
-	}
-  },
+	methods: {
+		pagechange(currentPage) {
+			this.current = currentPage;
+		},
+		toggleSearchResults(recommended_OR_all) {
+			this.$store.commit("toggleSearchResults", recommended_OR_all);
+		}
+	},
+	computed: {
+		recommendedResults() {
+			return this.searchResults.slice(0, this.display)
+		},
+		currentSearchResults() {
+			let startIndex = this.display * this.current - this.display;
+			let endIndex = this.display * this.current;
+			return this.searchResults.slice(startIndex, endIndex);
+		},
+		showRecommendedResults() {
+			return this.$store.state.showRecommendedResults;
+		},
+		showAllResults() {
+			return this.$store.state.showAllResults;
+		},
+		loginStatus() {
+			return this.$store.state.loginStatus;
+		},
+		searchResults() {
+			return this.$store.state.searchResults;
+		},
+		total() {
+			return this.$store.state.searchResults.length;
+		}
+	},
 
-  mounted() {
-    auth
-      .isUserLogin()
-	//   .then(res => localStorage.setItem("isLogin", res.data.result));
-	    .then(
+	mounted() {
+		auth
+			.isUserLogin()
+			.then(
 			res => this.$store.commit(
-                "updateLoginStatus",
-                res.data.result
-              )
-		)
-	console.log("localStroage's length is",localStorage.length)
-	if (!localStorage['searchResults']) {
-		
-		this.$router.push('/login')
+				"updateLoginStatus",
+				res.data.result
+			)
+			)
+		if (!localStorage['searchResults']) {
+			this.$router.push('/login')
+		}
+		// 刷新页面之后保持状态
+		this.$store.commit('updateSearchResults',JSON.parse(localStorage.getItem('searchResults')));
 	}
-  }
-  
-};
+	};
+
 </script>
 
 <style>

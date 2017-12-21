@@ -115,22 +115,10 @@ export default {
         }
       );
     }
-  },
+  }
   // created(){
 
   // }
-  mounted() {
-    (async function loginCheck(self) {
-      
-      let response = await auth.isUserLogin();
-      if(!response) {
-        return
-      } else {
-        (response.data.resultType === '0')?self.$router.push('/'):(console.log(response.data.message))
-      }
-      
-    })(this)
-  }
 };
 </script>
 
