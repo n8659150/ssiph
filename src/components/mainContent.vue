@@ -25,35 +25,29 @@ export default {
   },
   methods: {
     async fuzzyQuery() {
-      // var fullUrl = globalConsts.serverUrl + globalConsts.globalSearch + "fuzzyQuery=" + this.keywords;
-      let self = this;
-      let response = await queries.fuzzyQuery(self.keywords)
-      if(!response) {
-        return 
+      let response = await queries.fuzzyQuery(this.keywords);
+      if (!response) {
+        return;
       } else {
-        let result = response.data.result
-        // this.$store.commit('updateSearchResults',result)
-        localStorage.setItem(
-          "searchResults",
-          JSON.stringify(result)
-        );
-        this.$store.commit('updateSearchResults',result)
-        self.$router.push("/list");
-        // console.log(this.$store.state.searchResults)
+        let result = response.data.result;
+        localStorage.setItem("searchResults", JSON.stringify(result));
+        this.$store.commit("updateSearchResults", result);
+        this.$router.push("/list");
       }
-      
-
     }
   },
   mounted() {
     auth
       .isUserLogin()
-      .then(res => (res.data.resultType === '1')?(this.$router.push('/login')):(res.data), res => console.log(res));
-        if (localStorage.length === 0) {
-          this.$router.push('/login')
-        }
+      .then(
+        res =>
+          res.data.resultType === "1" ? this.$router.push("/login") : res.data,
+        res => console.log(res)
+      );
+    if (localStorage.length === 0) {
+      this.$router.push("/login");
+    }
   }
-
 };
 </script>
 

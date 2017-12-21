@@ -3,16 +3,10 @@
 </template>
 
 <script>
-
 export default {
-  name: 'loginFooter',
-  props:['footerText']
-  // data () {
-  //   return {
-  //     msg: 'Welcome to Your Vue.js App'
-  //   }
-  // }
-}
+  name: "loginFooter",
+  props: ["footerText"]
+};
 </script>
 
 <style>

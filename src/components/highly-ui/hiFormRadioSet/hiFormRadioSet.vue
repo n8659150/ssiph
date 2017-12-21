@@ -28,20 +28,25 @@
     </tr>
 </template>
 <script>
-
 export default {
-    model: {
-        prop: 'modelValue',
-        event: 'change'
-    },
-    props: { title: String, description: String, name: String, options: Array, value: String, modelValue: String },
-    methods: {
-        updateInput(value) {
-            this.$emit('change', value);
-        }
-
+  model: {
+    prop: "modelValue",
+    event: "change"
+  },
+  props: {
+    title: String,
+    description: String,
+    name: String,
+    options: Array,
+    value: String,
+    modelValue: String
+  },
+  methods: {
+    updateInput(value) {
+      this.$emit("change", value);
     }
-}
+  }
+};
 </script>
 <style scoped>
 

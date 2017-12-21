@@ -229,42 +229,40 @@
     <!-- 联系我们 结束 -->
 </template>
 <script>
-
 export default {
-    name: 'contactUsForm',
-    data() {
-        return {
-            productType_c: '-1',
-            powerVoltage_c: '-1',
-            powerFrquency_c: '-1',
-            powerPhase_c: '-1',
-            paiqiliang_c: '',
-            lengliang_c: '',
-            lengliangUnit_c: 'W',
-            lengmei_c: '-1',
-            rotationalSpeed_c: '',
-            heightSize_c: '',
-            heightSizeUnit_c: 'mm',
-            capMeasCond_c: '-1'
-        }
-    },
-    methods: {
-        closeForm(name) {
-            this.$store.commit('closeForm', name);
-        }
-    },
-    computed: {
-        contactUsOpened() {
-            return this.$store.state.contactUsOpened
-        }
+  name: "contactUsForm",
+  data() {
+    return {
+      productType_c: "-1",
+      powerVoltage_c: "-1",
+      powerFrquency_c: "-1",
+      powerPhase_c: "-1",
+      paiqiliang_c: "",
+      lengliang_c: "",
+      lengliangUnit_c: "W",
+      lengmei_c: "-1",
+      rotationalSpeed_c: "",
+      heightSize_c: "",
+      heightSizeUnit_c: "mm",
+      capMeasCond_c: "-1"
+    };
+  },
+  methods: {
+    closeForm(name) {
+      this.$store.commit("closeForm", name);
     }
-}
-  // data () {
-  //   return {
-  //     msg: 'Welcome to Your Vue.js App'
-  //   }
-  // }
-
+  },
+  computed: {
+    contactUsOpened() {
+      return this.$store.state.contactUsOpened;
+    }
+  }
+};
+// data () {
+//   return {
+//     msg: 'Welcome to Your Vue.js App'
+//   }
+// }
 </script>
 
 <style>

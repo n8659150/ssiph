@@ -85,13 +85,13 @@
 										<div ng-show="(([$storage.searchResults] | filter:modelFilter).length == 0) && showAll.active == true" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
 											<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle">{{'KEYWORDCHECK' | translate}}</a>
 										</div> -->
-									<tr v-show="showRecommendedResults" class="list-table-tr" v-for="(result,key,index) in recommendedResults" :key="key">
+									<tr v-show="showRecommendedResults" class="list-table-tr" v-for="(result,key,index) in recommendedResults">
 										<!-- 名称 -->
 										<td class="list-table-td col-wd-150">
 											<div>
 												<!-- <span><a ui-sref="frame.detail({id:result.id})">{{result.productName}}</a></span> -->
 												<span>
-													<a href="javascript:void(0)">{{result.productName}}</a>
+													<a href="javascript:void(0)" @click="queryById(result.id)">{{result.productName}}</a>
 												</span>
 											</div>
 										</td>
@@ -209,7 +209,6 @@
 						</div>
 					</div>
 					<hiPagination v-show="showAllResults" :total="total" :current-page='current' @pagechange="pagechange"></hiPagination>
-					<!--<paginate-links for="results" :limit="2" :show-step-links="true"></paginate-links>-->
 				</div>
 			</div>
 		</div>
@@ -219,65 +218,76 @@
 <script>
 import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
 import auth from "./auth.vue";
+import queries from "./queries.vue";
 export default {
-	name: "mainResult",
-	data() {
-		return {
-			current: 1,
-			display: 7
-		};
-	},
-	methods: {
-		pagechange(currentPage) {
-			this.current = currentPage;
-		},
-		toggleSearchResults(recommended_OR_all) {
-			this.$store.commit("toggleSearchResults", recommended_OR_all);
-		}
-	},
-	computed: {
-		recommendedResults() {
-			return this.searchResults.slice(0, this.display)
-		},
-		currentSearchResults() {
-			let startIndex = this.display * this.current - this.display;
-			let endIndex = this.display * this.current;
-			return this.searchResults.slice(startIndex, endIndex);
-		},
-		showRecommendedResults() {
-			return this.$store.state.showRecommendedResults;
-		},
-		showAllResults() {
-			return this.$store.state.showAllResults;
-		},
-		loginStatus() {
-			return this.$store.state.loginStatus;
-		},
-		searchResults() {
-			return this.$store.state.searchResults;
-		},
-		total() {
-			return this.$store.state.searchResults.length;
-		}
-	},
+  name: "mainResult",
+  data() {
+    return {
+      current: 1,
+      display: 7
+    };
+  },
+  methods: {
+    pagechange(currentPage) {
+      this.current = currentPage;
+    },
+    toggleSearchResults(recommended_OR_all) {
+      this.$store.commit("toggleSearchResults", recommended_OR_all);
+    },
+    async queryById(id) {
+      let self = this;
+      let response = await queries.queryById(id);
+      if (!response) {
+        return;
+      } else {
+        let result = response.data.result;
+        localStorage.setItem("resultById", JSON.stringify(result));
+        this.$store.commit("updateResultById", result);
+        console.log(this.$store.state.resultById);
+        console.log(localStorage.getItem("resultById"));
+      }
+    }
+  },
+  computed: {
+    recommendedResults() {
+      return this.searchResults.slice(0, this.display);
+    },
+    currentSearchResults() {
+      let startIndex = this.display * this.current - this.display;
+      let endIndex = this.display * this.current;
+      return this.searchResults.slice(startIndex, endIndex);
+    },
+    showRecommendedResults() {
+      return this.$store.state.showRecommendedResults;
+    },
+    showAllResults() {
+      return this.$store.state.showAllResults;
+    },
+    loginStatus() {
+      return this.$store.state.loginStatus;
+    },
+    searchResults() {
+      return this.$store.state.searchResults;
+    },
+    total() {
+      return this.$store.state.searchResults.length;
+    }
+  },
 
-	mounted() {
-		auth
-			.isUserLogin()
-			.then(
-			res => this.$store.commit(
-				"updateLoginStatus",
-				res.data.result
-			)
-			)
-		if (!localStorage['searchResults']) {
-			this.$router.push('/login')
-		}
-		// 刷新页面之后保持状态
-		this.$store.commit('updateSearchResults',JSON.parse(localStorage.getItem('searchResults')));
-	}
-	};
-
+  mounted() {
+    auth
+      .isUserLogin()
+      .then(res => this.$store.commit("updateLoginStatus", res.data.result));
+    if (!localStorage["searchResults"]) {
+      this.$router.push("/login");
+    }
+    // 刷新页面之后保持状态
+    this.$store.commit(
+      "updateSearchResults",
+      JSON.parse(localStorage.getItem("searchResults"))
+    );
+  }
+};
 </script>
 
 <style>

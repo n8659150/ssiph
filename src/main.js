@@ -20,23 +20,27 @@ const store = new Vuex.Store({
     // headerFooterShouldHide:false,
     advSearchOpened: false,//高级搜索 
     contactUsOpened: false, //联系我们
-    showRecommendedResults:true, //展示推荐机种 / 展示所有机种
-    showAllResults:false,
-    username:'',
-    searchResults:''
+    showRecommendedResults: true, //展示推荐机种 / 展示所有机种
+    showAllResults: false,
+    username: '',
+    searchResults: '',
+    resultById: ''
   },
   mutations: {
-    setUserName(state,username) {
+    setUserName(state, username) {
       state.username = username;
     },
     // setPassWord(state,password) {
     //   state.password = password;
     // },
-    updateLoginStatus(state,loginStatus) {
+    updateLoginStatus(state, loginStatus) {
       state.loginStatus = loginStatus
     },
-    updateSearchResults(state,searchResults) { 
+    updateSearchResults(state, searchResults) {
       state.searchResults = searchResults
+    },
+    updateResultById(state, resultById) {
+      state.resultById = resultById
     },
     toggleForm(state, name) {
       state[name] = !state[name];
@@ -44,23 +48,22 @@ const store = new Vuex.Store({
     closeForm(state, name) {
       state[name] = false;
     },
-    toggleSearchResults(state,whichOne) {
+    toggleSearchResults(state, whichOne) {
       state.showRecommendedResults = false;
       state.showAllResults = false;
-      (whichOne === 'recommended') ? state.showRecommendedResults = true: state.showAllResults = true;
+      (whichOne === 'recommended') ? state.showRecommendedResults = true : state.showAllResults = true;
     }
   }
 })
 
 // router config
 const routes = [
-  { path: '/', name:'home', component: mainContent },
-  { path: '/list', name:'list', component: mainResult },
-  { path: '/login', name:'login', component: login }
-  // { path: '/bar', component: Bar }
+  { path: '/', name: 'home', component: mainContent },
+  { path: '/list', name: 'list', component: mainResult },
+  { path: '/login', name: 'login', component: login }
 ];
 const router = new VueRouter({
-  routes // （缩写）相当于 routes: routes
+  routes
 })
 new Vue({
   el: '#app',

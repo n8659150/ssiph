@@ -9,14 +9,8 @@
 
 <script>
 export default {
-  name: 'mainFooter',
-  // data () {
-  //   return {
-  //     msg: 'Welcome to Your Vue.js App'
-  //   }
-  // },
-
-}
+  name: "mainFooter"
+};
 </script>
 
 <style>

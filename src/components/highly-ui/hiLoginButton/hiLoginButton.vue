@@ -7,8 +7,8 @@
 </template>
 <script>
 export default {
-    props: { buttonText: String,isDisabled:Boolean }
-}
+  props: { buttonText: String, isDisabled: Boolean }
+};
 </script>
 <style scoped>
 

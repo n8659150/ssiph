@@ -24,43 +24,35 @@
 </template>
 
 <script>
-// import { mapGetters, mapActions, mapMutations, mapState } from 'vuex';
-import auth from './auth.vue'
+import auth from "./auth.vue";
 export default {
-    name: 'headerBar',
-    // data () {
-    //   return {
-    //     msg: 'Welcome to Your Vue.js App'
-    //   }
-    // }
-    methods: {
-        toggleForm(name) {
-            this.$store.commit('toggleForm', name)
+  name: "headerBar",
+  methods: {
+    toggleForm(name) {
+      this.$store.commit("toggleForm", name);
+    },
+    logout() {
+      let self = this;
+      auth.userLogout(self.$store.userName, self.$store.passWord).then(
+        function successCallback(response) {
+          self.$router.push({ path: "/login" });
+          localStorage.clear();
         },
-        logout() {
-            let self = this;
-            auth.userLogout(self.$store.userName, self.$store.passWord).then(
-                function successCallback(response) {
-                    self.$router.push({ path: '/login' });
-                    localStorage.clear();
-                },
-                function errorCallback(response) {
-                    console.log(response);
-                }
-
-            )
-            
+        function errorCallback(response) {
+          console.log(response);
         }
-    },
-    computed:{
-        username(){
-            return this.$store.state.username
-        }
-    },
-    mounted(){
-        this.$store.commit('setUserName',localStorage.getItem('userName'));
+      );
     }
-}
+  },
+  computed: {
+    username() {
+      return this.$store.state.username;
+    }
+  },
+  mounted() {
+    this.$store.commit("setUserName", localStorage.getItem("userName"));
+  }
+};
 </script>
 
 <style>

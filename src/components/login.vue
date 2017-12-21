@@ -7,28 +7,14 @@
     <p class="authMessage" v-show="message.length >= 1">{{message}}</p>
     <div class="loginForm">
         <form name="myForm" class="loginPadding">
-            <!-- <div>
-            <h2>用户名：</h2>
-            <label>
-                    <span style="display:inline-block;font-size:12px;color:red;margin-bottom:5px;" v-show="userExist == 0">用户不存在</span>
-                    <input type="text" name="userName" placeholder="请输入用户名" v-model="userName" class="txt_input" />
-            </label>
-            </div> -->
             <hiLoginRawInput title="用户名" type="text" placeholder="请输入用户名" v-model="userName"></hiLoginRawInput>
             <hiLoginRawInput title="密码" type="password" placeholder="请输入密码" v-model="acctPswd"></hiLoginRawInput>
             <span class="signup"><a id="signup" href="javascript:void(0);">注册用户</a></span>
             <span class="forgot"><a id="iforget" href="javascript:void(0);">忘记密码</a></span>
-            <!-- <div class="rem_sub">
-                <label>
-                    <input type="button" class="loginButton" name="loginButton" id="loginButton" value="登 录" @click="login(userName,acctPswd)" style="opacity: 0.92;" />
-                </label>
-            </div> -->
             <hiLoginButton buttonText="登 录" :isDisabled="shouldBtnDisabled" @click.native="login(userName,acctPswd)"></hiLoginButton>
             <div class="version">{{version}}</div>
         </form>
     </div>
-    <!-- <div class="enVer"><a id="enVer" ng-show="currentLang == 'cn'" href="javascript:void(0);" ng-click="useLang('en')">English Version</a></div>
-    <div class="enVer"><a id="cnVer" ng-show="currentLang == 'en'" href="javascript:void(0);" ng-click="useLang('cn')">切换至中文版</a></div> -->
 </div>
 <loginFooter :footerText="footerText"></loginFooter> 
 </div>
@@ -93,10 +79,7 @@ export default {
                 "userInfo",
                 JSON.stringify(response.data.result)
               );
-              localStorage.setItem(
-                "isLogin",
-                true
-              )
+              localStorage.setItem("isLogin", true);
               this.$store.commit(
                 "setUserName",
                 localStorage.getItem("userName")
@@ -116,9 +99,6 @@ export default {
       );
     }
   }
-  // created(){
-
-  // }
 };
 </script>
 
