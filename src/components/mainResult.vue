@@ -245,6 +245,7 @@ export default {
         this.$store.commit("updateResultById", result);
         console.log(this.$store.state.resultById);
         console.log(localStorage.getItem("resultById"));
+				this.$router.push("/result");
       }
     }
   },

@@ -7,6 +7,7 @@ import VuePaginate from 'vue-paginate'
 import mainContent from './components/mainContent.vue'
 import login from './components/login.vue'
 import mainResult from './components/mainResult.vue'
+import detailResult from './components/detailResult.vue'
 import highlyUI from './components/highly-ui/'
 Vue.use(Vuex)
 Vue.use(VueResource)
@@ -60,7 +61,8 @@ const store = new Vuex.Store({
 const routes = [
   { path: '/', name: 'home', component: mainContent },
   { path: '/list', name: 'list', component: mainResult },
-  { path: '/login', name: 'login', component: login }
+  { path: '/login', name: 'login', component: login },
+  { path: '/result', name: 'result', component: detailResult },
 ];
 const router = new VueRouter({
   routes

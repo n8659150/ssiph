@@ -1064,6 +1064,8 @@ button:disabled {
 }
 .detail-td {
 	border-bottom: 1px solid #d8d8d8;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
 }
 /* 去除详情页最后一行的下边框*/
 .list-table-tr:last-child .detail-td {
