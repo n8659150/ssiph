@@ -30,8 +30,10 @@ export default {
         return;
       } else {
         let result = response.data.result;
+        localStorage.setItem("recommendedResults",JSON.stringify(result.slice(0,7)))
         localStorage.setItem("searchResults", JSON.stringify(result));
-        this.$store.commit("updateSearchResults", result);
+        this.$store.commit("updateRecommendedResults",JSON.parse(localStorage.getItem('recommendedResults')))
+        this.$store.commit("updateSearchResults", JSON.parse(localStorage.getItem('searchResults')));
         this.$router.push("/list");
       }
     }

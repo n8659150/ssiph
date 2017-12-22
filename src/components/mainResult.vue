@@ -85,6 +85,7 @@
 										<div ng-show="(([$storage.searchResults] | filter:modelFilter).length == 0) && showAll.active == true" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
 											<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle">{{'KEYWORDCHECK' | translate}}</a>
 										</div> -->
+										{{recommendedResults.length}}
 									<tr v-show="showRecommendedResults" class="list-table-tr" v-for="(result,key,index) in recommendedResults">
 										<!-- 名称 -->
 										<td class="list-table-td col-wd-150">
@@ -145,7 +146,7 @@
 										</td>
 									</tr>
 
-									<tr v-show="showAllResults" class="list-table-tr" v-for="(result,key,index) in currentSearchResults" :key="key">
+									<tr v-show="showAllResults" class="list-table-tr" v-for="(result,key,index) in currentSearchResults">
 										<!-- 名称 -->
 										<td class="list-table-td col-wd-150">
 											<div>
@@ -251,12 +252,15 @@ export default {
   },
   computed: {
     recommendedResults() {
-      return this.searchResults.slice(0, this.display);
+      return this.$store.state.recommendedResults;
+		},
+		searchResults() {
+      return this.$store.state.searchResults;
     },
     currentSearchResults() {
       let startIndex = this.display * this.current - this.display;
       let endIndex = this.display * this.current;
-      return this.searchResults.slice(startIndex, endIndex);
+      return this.$store.state.searchResults.slice(startIndex, endIndex);
     },
     showRecommendedResults() {
       return this.$store.state.showRecommendedResults;
@@ -266,9 +270,6 @@ export default {
     },
     loginStatus() {
       return this.$store.state.loginStatus;
-    },
-    searchResults() {
-      return this.$store.state.searchResults;
     },
     total() {
       return this.$store.state.searchResults.length;
@@ -282,7 +283,13 @@ export default {
     if (!localStorage["searchResults"]) {
       this.$router.push("/login");
     }
-    // 刷新页面之后保持状态
+		// 刷新页面之后保持状态
+		console.log(this.$store.state.showRecommendedResults)
+		console.log(this.$store.state.showAllResults)
+		this.$store.commit(
+      "updateRecommendedResults",
+      JSON.parse(localStorage.getItem("recommendedResults"))
+    );
     this.$store.commit(
       "updateSearchResults",
       JSON.parse(localStorage.getItem("searchResults"))

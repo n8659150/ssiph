@@ -47,6 +47,9 @@ export default {
   computed: {
     username() {
       return this.$store.state.username;
+    },
+    showAll() {
+      return this.$store.state.showAllResults
     }
   },
   mounted() {

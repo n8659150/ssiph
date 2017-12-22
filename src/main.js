@@ -24,8 +24,18 @@ const store = new Vuex.Store({
     showRecommendedResults: true, //展示推荐机种 / 展示所有机种
     showAllResults: false,
     username: '',
+    recommendedResults:'',
     searchResults: '',
-    resultById: ''
+    resultById: '',
+    detailTabs: {
+      detailInfo: true,
+      tmCalc: false,
+      performanceTable: false,
+      performanceGraph: false,
+      techDoc: false,
+      dllPage: false
+    }
+
   },
   mutations: {
     setUserName(state, username) {
@@ -36,6 +46,9 @@ const store = new Vuex.Store({
     // },
     updateLoginStatus(state, loginStatus) {
       state.loginStatus = loginStatus
+    },
+    updateRecommendedResults(state, recommendedResults) {
+      state.recommendedResults = recommendedResults
     },
     updateSearchResults(state, searchResults) {
       state.searchResults = searchResults
@@ -53,6 +66,41 @@ const store = new Vuex.Store({
       state.showRecommendedResults = false;
       state.showAllResults = false;
       (whichOne === 'recommended') ? state.showRecommendedResults = true : state.showAllResults = true;
+    },
+    toggleDetailTabs(state, whichOne) {
+      // detailInfo:true,
+      // tmCalc:false,
+      // performanceTable:false,
+      // performanceGraph:false,
+      // techDoc:false,
+      // dllPage:false
+      for (let detailTab in state.detailTabs) {
+        state.detailTabs[detailTab] = false
+      }
+      switch (whichOne) {
+        case "detailInfo":
+          state.detailTabs.detailInfo = true
+          break
+        case "tmCalc":
+          state.detailTabs.tmCalc = true
+          break
+        case "performanceTable":
+          state.detailTabs.performanceTable = true
+          break
+        case "performanceGraph":
+          state.detailTabs.performanceGraph = true
+          break
+        case "techDoc":
+          state.detailTabs.techDoc = true
+          break
+        case "dllPage":
+          state.detailTabs.dllPage = true
+          break
+        default:
+          state.detailTabs.detailInfo = true
+
+      }
+      
     }
   }
 })
