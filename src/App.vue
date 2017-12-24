@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import mainHeader from "./components/mainHeader.vue";
-import mainFooter from "./components/mainFooter.vue";
+import mainHeader from "./components/main/mainHeader/mainHeader.vue";
+import mainFooter from "./components/main/mainFooter/mainFooter.vue";
 export default {
   name: "app",
   data() {
