@@ -43,7 +43,7 @@ export default {
       .isUserLogin()
       .then(
         res =>
-          res.data.resultType === "1" ? this.$router.push("/login") : res.data,
+          res.data.resultType === "1" ? this.$router.push("/login") : console.log(res.data),
         res => console.log(res)
       );
     if (localStorage.length === 0) {

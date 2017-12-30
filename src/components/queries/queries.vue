@@ -73,9 +73,8 @@ function performanceCurve(params) {
   var fullUrl =
     globalConsts.serverUrl +
     globalConsts.getCalcResult +
-    params.join("&") +
-    "&callback=JSON_CALLBACK";
-  return $http.jsonp(fullUrl);
+    params.join("&");
+    return Vue.http.jsonp(fullUrl, { jsonp: "callback" });
 }
 // 获取DLL文件和技术协议书的文件名
 function getFileNameFromURL(url) {

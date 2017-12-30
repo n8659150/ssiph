@@ -76,16 +76,15 @@
 							<table class="tablebox">
 								<tbody class="list-table-tbody">
 									<!-- <div ng-show="$storage.searchResults.length == 0 || $storage.resultType != 0" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
-											<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle"
-											 ui-sref="frame.home">{{'SEARCHAGAIN' | translate}}</a>
-										</div>
-										<div ng-show="(([$storage.recommendedResults] | filter:modelFilter).length == 0) && showRecommended.active == true" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
-											<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle">{{'KEYWORDCHECK' | translate}}</a>
-										</div>
-										<div ng-show="(([$storage.searchResults] | filter:modelFilter).length == 0) && showAll.active == true" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
-											<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle">{{'KEYWORDCHECK' | translate}}</a>
-										</div> -->
-										{{recommendedResults.length}}
+												<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle"
+												 ui-sref="frame.home">{{'SEARCHAGAIN' | translate}}</a>
+											</div>
+											<div ng-show="(([$storage.recommendedResults] | filter:modelFilter).length == 0) && showRecommended.active == true" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
+												<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle">{{'KEYWORDCHECK' | translate}}</a>
+											</div>
+											<div ng-show="(([$storage.searchResults] | filter:modelFilter).length == 0) && showAll.active == true" style="height:54px;line-height:54px;text-align:center;border-bottom:1px solid #e6ebf2">
+												<span style="vertical-align:middle;">{{'NORESULT' | translate}}</span> <a style="font-size:12px;vertical-align:middle">{{'KEYWORDCHECK' | translate}}</a>
+											</div> -->
 									<tr v-show="showRecommendedResults" class="list-table-tr" v-for="(result,key,index) in recommendedResults">
 										<!-- 名称 -->
 										<td class="list-table-td col-wd-150">
@@ -221,80 +220,89 @@ import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
 import auth from "../../auth/auth.vue";
 import queries from "../../queries/queries.vue";
 export default {
-  name: "mainResult",
-  data() {
-    return {
-      current: 1,
-      display: 7
-    };
-  },
-  methods: {
-    pagechange(currentPage) {
-      this.current = currentPage;
-    },
-    toggleSearchResults(recommended_OR_all) {
-      this.$store.commit("toggleSearchResults", recommended_OR_all);
-    },
-    async queryById(id) {
-      let self = this;
-      let response = await queries.queryById(id);
-      if (!response) {
-        return;
-      } else {
-        let result = response.data.result;
-        localStorage.setItem("resultById", JSON.stringify(result));
-        this.$store.commit("updateResultById", result);
-        console.log(this.$store.state.resultById);
-        console.log(localStorage.getItem("resultById"));
+	name: "mainResult",
+	data() {
+		return {
+			current: 1,
+			display: 7
+		};
+	},
+	methods: {
+		pagechange(currentPage) {
+			this.current = currentPage;
+		},
+		toggleSearchResults(recommended_OR_all) {
+			this.$store.commit("toggleSearchResults", recommended_OR_all);
+		},
+		async queryById(id) {
+			let self = this;
+			let response = await queries.queryById(id);
+			if (!response) {
+				return;
+			} else {
+				let result = response.data.result;
+				// 同时获取全性能曲线数据
+				let performanceCurveModel = { "productName": result['productName'], "constantType": "CoolingCapacity", "productType": "定速", "f": "60" }
+				let performanceCurveParams = queries.paramsParser(performanceCurveModel)
+				let curveDataResponse = await queries.performanceCurve(performanceCurveParams);
+				let performanceCurve = curveDataResponse.data
+
+				console.log(performanceCurve);
+				localStorage.setItem("resultById", JSON.stringify(result));
+				this.$store.commit("updateResultById", result);
+				localStorage.setItem("performanceCurveData", JSON.stringify(performanceCurve));
+				this.$store.commit("updatePerformanceCurve", performanceCurve)
+				// console.log(this.$store.state.resultById);
+				// console.log(localStorage.getItem("resultById"));
 				this.$router.push("/result");
-      }
-    }
-  },
-  computed: {
-    recommendedResults() {
-      return this.$store.state.recommendedResults;
+			}
+		}
+	},
+	computed: {
+		recommendedResults() {
+			return this.$store.state.recommendedResults;
 		},
 		searchResults() {
-      return this.$store.state.searchResults;
-    },
-    currentSearchResults() {
-      let startIndex = this.display * this.current - this.display;
-      let endIndex = this.display * this.current;
-      return this.$store.state.searchResults.slice(startIndex, endIndex);
-    },
-    showRecommendedResults() {
-      return this.$store.state.showRecommendedResults;
-    },
-    showAllResults() {
-      return this.$store.state.showAllResults;
-    },
-    loginStatus() {
-      return this.$store.state.loginStatus;
-    },
-    total() {
-      return this.$store.state.searchResults.length;
-    }
-  },
+			return this.$store.state.searchResults;
+		},
+		currentSearchResults() {
+			let startIndex = this.display * this.current - this.display;
+			let endIndex = this.display * this.current;
+			return this.$store.state.searchResults.slice(startIndex, endIndex);
+		},
+		showRecommendedResults() {
+			return this.$store.state.showRecommendedResults;
+		},
+		showAllResults() {
+			return this.$store.state.showAllResults;
+		},
+		loginStatus() {
+			return this.$store.state.loginStatus;
+		},
+		total() {
+			return this.$store.state.searchResults.length;
+		}
+	},
 
-  mounted() {
-    auth
-      .isUserLogin()
-      .then(res => this.$store.commit("updateLoginStatus", res.data.result));
-    if (!localStorage["searchResults"]) {
-      this.$router.push("/login");
-    }
+	mounted() {
+		auth
+			.isUserLogin()
+			.then(res => this.$store.commit("updateLoginStatus", res.data.result));
+		if (!localStorage["searchResults"]) {
+			this.$router.push("/login");
+		}
 		// 刷新页面之后保持状态
 		console.log(this.$store.state.showRecommendedResults)
 		console.log(this.$store.state.showAllResults)
 		this.$store.commit(
-      "updateRecommendedResults",
-      JSON.parse(localStorage.getItem("recommendedResults"))
-    );
-    this.$store.commit(
-      "updateSearchResults",
-      JSON.parse(localStorage.getItem("searchResults"))
-    );
-  }
+			"updateRecommendedResults",
+			JSON.parse(localStorage.getItem("recommendedResults"))
+		);
+		this.$store.commit(
+			"updateSearchResults",
+			JSON.parse(localStorage.getItem("searchResults"))
+		);
+	}
 };
 </script>
 

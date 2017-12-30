@@ -27,6 +27,7 @@ const store = new Vuex.Store({
     recommendedResults:'',
     searchResults: '',
     resultById: '',
+    performanceCurve:'',
     detailTabs: {
       detailInfo: true,
       tmCalc: false,
@@ -55,6 +56,9 @@ const store = new Vuex.Store({
     },
     updateResultById(state, resultById) {
       state.resultById = resultById
+    },
+    updatePerformanceCurve(state, performanceCurve) {
+      state.performanceCurve = performanceCurve
     },
     toggleForm(state, name) {
       state[name] = !state[name];
