@@ -1,14 +1,15 @@
-# vue-hpiss
+# ssiph
 
 > hpiss vue version
 
 ## 技术栈
 
-- vuejs 2
+- vuejs
 - vue-router
 - vue-cli
 - vuex
 - vue-resource
+- highcharts
 
 ## Build Setup
 
