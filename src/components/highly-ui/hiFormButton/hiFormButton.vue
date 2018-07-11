@@ -5,8 +5,8 @@
 </template>
 <script>
 export default {
-    props: { buttonText: String }
-}
+  props: { buttonText: String }
+};
 </script>
 <style scoped>
 

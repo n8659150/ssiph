@@ -5,7 +5,7 @@
         </th>
         <td width="215">
             <span>{{description}}
-                <span class="unitStyle"> {{lengliangUnit}}</span>
+                <span class="unitStyle">{{lengliangUnit}}</span>
             </span>
             <!--<span ng-show="britishSystem == 'on'">23884~54592 <span class="unitStyle">BTU/h</span></span>-->
         </td>
@@ -16,14 +16,20 @@
 </template>
 <script>
 export default {
-    props: { title: String, description: String, lengliangUnit: String, placeholder: String, value: String },
-    methods: {
-        updateValue: function(value) {
-            // 通过 input 事件发出数值给v-model，相当于发送给props里面定义的这个“value”。
-            this.$emit('input', value)
-        }
+  props: {
+    title: String,
+    description: String,
+    lengliangUnit: String,
+    placeholder: String,
+    value: String
+  },
+  methods: {
+    updateValue: function(value) {
+      // 通过 input 事件发出数值给v-model，相当于发送给props里面定义的这个“value”。
+      this.$emit("input", value);
     }
-}
+  }
+};
 </script>
 <style>
 

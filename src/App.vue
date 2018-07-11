@@ -18,22 +18,22 @@
 </template>
 
 <script>
-import mainHeader from './components/mainHeader.vue'
-import mainFooter from './components/mainFooter.vue'
+import mainHeader from "@/components/main/mainHeader/mainHeader";
+import mainFooter from "@/components/main/mainFooter/mainFooter";
 export default {
-  name: 'app',
+  name: "app",
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+      msg: "Welcome to Your Vue.js App"
+    };
   },
-  computed:{
-    headerFooterShouldHide(){
+  computed: {
+    headerFooterShouldHide() {
       console.log(this.$route.path);
-      if(this.$route.path == '/login' || this.$route.path == '/signup') {
-        return false
+      if (this.$route.path == "/login" || this.$route.path == "/signup") {
+        return false;
       } else {
-        return true
+        return true;
       }
     }
   },
@@ -41,9 +41,9 @@ export default {
     mainHeader,
     mainFooter
   }
-}
+};
 </script>
 
 <style>
-
 </style>
+
