@@ -8,7 +8,7 @@ import hiFormRawInput from './hiFormRawInput/hiFormRawInput.vue'
 // 注册/登录页输入框
 import hiLoginRawInput from './hiLoginRawInput/hiLoginRawInput.vue'
 import hiLoginButton from './hiLoginButton/hiLoginButton.vue'
-
+import hiLoginDropDown from './hiLoginDropDown/hiLoginDropDown.vue'
 // 结果页分页器
 import hiPagination from './hiPagination/hiPagination.vue'
 
@@ -22,6 +22,7 @@ const highlyUI = {
         Vue.component('hiFormRawInput', hiFormRawInput);
         Vue.component('hiLoginRawInput', hiLoginRawInput);
         Vue.component('hiLoginButton', hiLoginButton);
+        Vue.component('hiLoginDropDown', hiLoginDropDown);
         Vue.component('hiPagination', hiPagination);
     }
 };

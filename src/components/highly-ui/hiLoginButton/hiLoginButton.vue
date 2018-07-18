@@ -7,9 +7,22 @@
 </template>
 <script>
 export default {
-    props: { buttonText: String,isDisabled:Boolean }
-}
+  props: { buttonText: String, isDisabled: Boolean }
+};
 </script>
 <style scoped>
-
+.rem_sub {
+    clear:both;
+}
+.rem_sub input.loginButton {
+	width: 309px;
+	height: 32px;
+	background-color: #0071bf;
+	/*background:url("../../images/btn_bg.png") repeat-x;*/
+	border: none;
+	color: #FFF;
+	padding-bottom: 2px;
+	font-size: 16px;
+	font-weight: bold;
+}
 </style>

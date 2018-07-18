@@ -1,0 +1,369 @@
+/* 默认样式重置 */
+blockquote,body,code,dd,div,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,html,input,legend,li,ol,p,pre,td,textarea,th,ul {
+	margin: 0;
+	padding: 0;
+}
+
+body,html {
+	height: 100%;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+fieldset,img {
+	border: 0
+}
+
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-weight: 400;
+	font-style: normal
+}
+
+a {
+	outline: 0;
+	text-decoration: none;
+}
+
+ol,ul {
+	list-style: none
+}
+
+caption,th {
+	text-align: left
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-weight: 400;
+	font-size: 100%
+}
+
+q:after,q:before {
+	content: ''
+}
+
+abbr,acronym {
+	border: 0;
+	font-variant: normal
+}
+
+sup {
+	vertical-align: text-top
+}
+
+sub {
+	vertical-align: text-bottom
+}
+
+input,select,textarea {
+	font-weight: inherit;
+	font-size: inherit;
+	font-family: inherit
+}
+
+
+.clearfix:after,.clearfix:before {
+	display: table;
+	content: "";
+	line-height: 0;
+}
+
+.clearfix:after {
+	clear: both;
+}
+/* 默认样式重置 结束*/
+
+/* 全局 */
+html {
+	/*background: #f3f3f3;*/
+	background:#fafafa;
+	color: #8c8c8c;
+	font-size: 14px;
+	font-family: arial,"Microsoft Yahei","Hiragino Sans GB",sans-serif
+}
+
+body {
+	min-width: 990px;
+	min-height: 740px;
+	font-size: 14px;
+	font-family: arial,"Microsoft Yahei","Hiragino Sans GB",sans-serif
+}
+
+a {
+	color: #333
+}
+
+a:hover {
+	color: #0071bf
+}
+
+.fullHeight {
+	height:100%;
+}
+
+.container {
+	position: relative;
+	margin: 0 auto;
+	/*width: 990px*/
+	width:85%
+}
+
+.wrap {
+	/*margin-top:-46px;*/
+	margin-bottom: -94px;
+	height: auto!important;
+	height: 100%;
+	min-height: 100%
+}
+
+input.input_normal {
+	border:transparent !important;
+}
+
+input.input_vaild {
+	border: 1px solid #2fbd68 !important;
+}
+
+input.input_error {
+	border: 1px solid #bd362f !important;
+}
+input:disabled {
+	cursor:not-allowed !important; 
+}
+button:disabled {
+	cursor:not-allowed !important; 
+}
+.authMessage {
+	text-align:center;
+	font-size:16px;
+	color:#bd362f;
+	margin-bottom:5px;
+}
+/*.btn_disabled {
+	cursor:not-allowed !important; 
+}*/
+/* 全局 结束*/
+/* 注册页 */
+.signupWrapper {
+            position:absolute;
+            /*top:30%;*/
+			top:25%;
+            left:50%;
+            margin-top:-180.5px;
+            margin-left:-201.5px;
+            width: 403px;
+            /*margin: 0 auto;*/
+            height: 720px;
+            /*margin-top: 98px;*/
+        }
+.signupForm {
+	background: url("../../images/signup_form_bg.png") no-repeat;
+	background: url("../../images/signup_form_bg.png") no-repeat\9;
+	height: 720px;
+	overflow: hidden;
+}
+
+.signupErrorMsg {
+	color:red;
+	display:inline-block;
+	margin-bottom:5px;
+}
+
+
+.signupPadding {
+	padding: 28px 40px 20px 40px;
+}
+/*.selectGender {
+	display:inline-block;
+	margin-top:4px;
+	margin-bottom:10px;
+	padding-right:20px;
+}*/
+
+/*.selectGender input[type="radio"] {
+	margin:0 5px;
+}*/
+
+.signupForm h2 {
+	color: #4f5d80;
+	font-size: 14px;
+	height: 19px;
+	font-weight: normal;
+	margin-bottom: 6px;
+}
+.requiredIcon {
+	display: inline-block;
+	color:red;
+	font-size:18px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.signupForm input.txt_input {
+	width: 295px;
+	height: 36px;
+	border: 1px solid #cad2db;
+	/*background: url(../../images/txt_input_bg.gif) no-repeat;*/
+	padding: 0 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	line-height: 36px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #717171;
+	font-family: Arial;
+}
+.signupForm select.gender_select {
+	width: 307px;
+    height: 36px;
+    border: 1px solid #cad2db;
+    /* background: url(../../images/txt_input_bg.gif) no-repeat; */
+    padding: 0 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    line-height: 36px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #717171;
+    font-family: Arial;
+}
+
+.signupForm select.birth_select {
+	width: 70px;
+    height: 36px;
+    border: 1px solid #cad2db;
+    /* background: url(../../images/txt_input_bg.gif) no-repeat; */
+    padding: 0 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    line-height: 36px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #717171;
+    font-family: Arial;
+}
+.signupForm select.width_50 {
+	width:50px !important;
+}
+.signupForm span.signup {
+	font-size: 12px;
+	float: left;
+	height: 16px;
+	margin-bottom: 15px;
+}
+
+.signupForm span.login {
+	font-size: 12px;
+	float: right;
+	margin-bottom: 15px;
+}
+.normalPosition {
+	position: static !important;
+}
+/*.rem_sub input.signupButton {
+	width: 309px;
+	height: 32px;
+	background-color: #0071bf;
+	border: none;
+	color: #FFF;
+	padding-bottom: 2px;
+	font-size: 16px;
+	font-weight: bold;
+}*/
+
+
+/*注册页 结束*/
+
+/* 登录页 */
+
+/* 登录页 结束*/
+
+/* 头部 */
+
+
+/* 头部 结束 */
+
+/* 高级搜索 */
+
+/* 高级搜索 结束*/
+
+
+/* 全局搜索页 */
+
+/* 全局搜索页 结束*/
+
+/* 脚部 */
+
+/* 由于主内容部分 + 脚部 高度大于768px，所以需要设置一下media query，在高度小于835px时隐藏脚部 */
+
+/* 脚部 结束*/
+
+/* 搜索结果页 */
+
+/* 搜索结果页 结束 */
+
+/* 详情页 */
+
+/* 详情页 结束 */
+
+
+/* 分页 */
+
+
+.pagination {
+	float: right;
+    padding-left: 0;
+}
+
+.pagination>li {
+    display: inline;
+}
+.pagination>li:first-child>a, .pagination>li:first-child>span {
+    margin-left: 0;
+}
+
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+}
+
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #0071bf;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #0071bf;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #0071bf;
+    border-color: #0071bf;
+}
+
+/* 分页 结束 */
